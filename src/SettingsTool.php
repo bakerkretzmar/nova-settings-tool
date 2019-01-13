@@ -1,11 +1,11 @@
 <?php
 
-namespace Bakerkretzmar\NovaSettingsTool;
+namespace Bakerkretzmar\SettingsTool;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
 
-class NovaSettingsTool extends Tool
+class SettingsTool extends Tool
 {
     /**
      * Perform any tasks that need to happen when the tool is booted.
@@ -14,8 +14,8 @@ class NovaSettingsTool extends Tool
      */
     public function boot()
     {
-        Nova::script('nova-settings-tool', __DIR__.'/../dist/js/tool.js');
-        Nova::style('nova-settings-tool', __DIR__.'/../dist/css/tool.css');
+        Nova::script('SettingsTool', __DIR__.'/../dist/js/tool.js');
+        Nova::style('SettingsTool', __DIR__.'/../dist/css/tool.css');
     }
 
     /**
@@ -25,6 +25,6 @@ class NovaSettingsTool extends Tool
      */
     public function renderNavigation()
     {
-        return view('nova-settings-tool::navigation');
+        return view('SettingsTool::navigation');
     }
 }

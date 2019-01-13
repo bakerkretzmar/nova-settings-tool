@@ -1,25 +1,54 @@
 {
     "name": "bakerkretzmar/nova-settings-tool",
-    "description": "A Laravel Nova tool.",
+    "description": "A Laravel Nova tool to view and edit application settings.",
+    "authors": [
+        {
+            "name": "Jacob Baker-Kretzmar",
+            "email": "jacob@bakerkretzmar.ca",
+            "role": "Developer"
+        }
+    ],
     "keywords": [
         "laravel",
-        "nova"
+        "nova",
+        "settings",
+        "tool"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
     "require": {
-        "php": ">=7.1.0"
+        "php": ">=7.1.0",
+        "laravel/nova": "*",
+        "spatie/valuestore": "^1.2"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.7",
+        "phpunit/phpunit": "^7.5"
     },
     "autoload": {
         "psr-4": {
-            "Bakerkretzmar\\NovaSettingsTool\\": "src/"
+            "Bakerkretzmar\\SettingsTool\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bakerkretzmar\\SettingsTool\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Bakerkretzmar\\NovaSettingsTool\\ToolServiceProvider"
+                "Bakerkretzmar\\SettingsTool\\SettingsToolServiceProvider"
             ]
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "config": {
         "sort-packages": true

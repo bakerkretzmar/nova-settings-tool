@@ -1,8 +1,8 @@
 <?php
 
-namespace Bakerkretzmar\NovaSettingsTool\Http\Middleware;
+namespace Bakerkretzmar\SettingsTool\Http\Middleware;
 
-use Bakerkretzmar\NovaSettingsTool\NovaSettingsTool;
+use Bakerkretzmar\SettingsTool\SettingsTool;
 
 class Authorize
 {
@@ -15,6 +15,6 @@ class Authorize
      */
     public function handle($request, $next)
     {
-        return resolve(NovaSettingsTool::class)->authorize($request) ? $next($request) : abort(403);
+        return resolve(SettingsTool::class)->authorize($request) ? $next($request) : abort(403);
     }
 }
