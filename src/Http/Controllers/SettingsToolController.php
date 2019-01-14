@@ -22,15 +22,20 @@ class SettingsToolController extends Controller
     {
         $settings = Valuestore::make($this->settingsPath)->all();
 
-        $appSettings = config('settings.groups');
+        $settingConfig = config('settings.groups');
 
-        foreach ($appSettings as $group) {
-            foreach ($group as $item) {
-                $item['value'] = $settings[$item['key']];
+        foreach ($settingConfig as $object) {
+            foreach ($object['settings'] as $settingObject) {
+                if (! array_key_exists($settingObject['key'], $settings)) {
+                    $settings[$settingObject['key']] = $settingObject['type'] == 'toggle' ? false : '';
+                }
             }
         }
 
-        return $appSettings;
+        return response()->json([
+            'settings' => $settings,
+            'settingConfig' => $settingConfig,
+        ]);
     }
 
     public function write(Request $request)

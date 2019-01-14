@@ -17,7 +17,7 @@ class SettingsToolServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'SettingsTool');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'settings-tool');
 
         $this->app->booted(function () {
             $this->routes();
