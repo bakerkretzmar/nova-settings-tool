@@ -2,14 +2,12 @@
 
 namespace Bakerkretzmar\SettingsTool\Http\Controllers;
 
-use Spatie\Valuestore\Valuestore;
-
 use Illuminate\Http\Request;
+use Spatie\Valuestore\Valuestore;
 use Illuminate\Routing\Controller;
 
 class SettingsToolController extends Controller
 {
-
     /** @var string */
     protected $settingsPath;
 
