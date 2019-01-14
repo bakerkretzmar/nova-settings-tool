@@ -15,7 +15,7 @@
 
         </div>
 
-        <setting-info :text="link.text" :url="link.url" class="py-6 px-8 w-1/2">{{ description }}</setting-info>
+        <setting-info :text="link.text || ''" :url="link.url || ''" class="py-6 px-8 w-1/2">{{ description }}</setting-info>
 
     </div>
 </template>

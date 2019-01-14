@@ -11,7 +11,7 @@
                 class="w-full form-control form-input form-input-bordered"
             />
 
-            <setting-info :text="link.text" :url="link.url" class="pt-3">{{ description }}</setting-info>
+            <setting-info v-if="description || link.text" :text="link.text || ''" :url="link.url || ''" class="pt-3">{{ description }}</setting-info>
 
         </div>
 

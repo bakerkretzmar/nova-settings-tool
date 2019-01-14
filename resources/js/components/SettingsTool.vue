@@ -16,8 +16,8 @@
                     <toggle-setting
                         v-if="setting.type == 'toggle'"
                         :name="setting.name"
-                        :description="setting.description"
-                        :link="setting.link"
+                        :description="setting.description || ''"
+                        :link="setting.link || {}"
                         :setting="{ key: setting.key, value: settings[setting.key] }"
                         @toggle="handleToggle"
                     />
@@ -25,8 +25,8 @@
                     <text-setting
                         v-if="setting.type == 'text'"
                         :name="setting.name"
-                        :description="setting.description"
-                        :link="setting.link"
+                        :description="setting.description || ''"
+                        :link="setting.link || {}"
                         :setting="{ key: setting.key, value: settings[setting.key] }"
                         @input="handleInput"
                     />
