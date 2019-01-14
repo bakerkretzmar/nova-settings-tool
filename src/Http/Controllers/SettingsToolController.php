@@ -13,14 +13,14 @@ class SettingsToolController extends Controller
 
     public function __construct(string $settingsPath = null)
     {
-        $this->settingsPath = $settingsPath ?? storage_path(config('settings.path'));
+        $this->settingsPath = $settingsPath ?? storage_path(config('settings.path', 'app/settings.json'));
     }
 
     public function read(Request $request)
     {
         $settings = Valuestore::make($this->settingsPath)->all();
 
-        $settingConfig = config('settings.groups');
+        $settingConfig = config('settings.panels');
 
         foreach ($settingConfig as $object) {
             foreach ($object['settings'] as $settingObject) {
