@@ -1,10 +1,10 @@
 {
     "name": "bakerkretzmar/nova-settings-tool",
-    "description": "A Laravel Nova tool to view and edit application settings.",
+    "description": "A Laravel Nova tool to manage app settings.",
     "authors": [
         {
             "name": "Jacob Baker-Kretzmar",
-            "email": "jacob@bakerkretzmar.ca",
+            "email": "jacobtbk@gmail.com",
             "role": "Developer"
         }
     ],
@@ -14,6 +14,7 @@
         "settings",
         "tool"
     ],
+    "homepage": "https://github.com/bakerkretzmar/nova-settings-tool",
     "license": "MIT",
     "repositories": [
         {
