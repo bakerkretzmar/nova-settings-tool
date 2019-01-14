@@ -7,7 +7,6 @@ use Laravel\Nova\Tool;
 
 class SettingsTool extends Tool
 {
-
     /** @var string */
     public $title;
 
@@ -38,5 +37,4 @@ class SettingsTool extends Tool
     {
         return view('settings-tool::navigation', ['title' => $this->title]);
     }
-
 }

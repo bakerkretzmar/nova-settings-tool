@@ -4,11 +4,8 @@ namespace Bakerkretzmar\SettingsTool\Tests;
 
 use Bakerkretzmar\SettingsTool\Http\Controllers\SettingsToolController;
 
-use Spatie\Valuestore\Valuestore;
-
 class SettingsToolControllerTest extends TestCase
 {
-
     public function setUp()
     {
         parent::setUp();
@@ -20,7 +17,7 @@ class SettingsToolControllerTest extends TestCase
     }
 
     /** @test */
-    function it_gets_the_settings()
+    public function it_gets_the_settings()
     {
         $this
             ->get('nova-vendor/settings-tool')
@@ -29,7 +26,7 @@ class SettingsToolControllerTest extends TestCase
     }
 
     /** @test */
-    function it_sets_the_settings()
+    public function it_sets_the_settings()
     {
         $this
             ->postJson('nova-vendor/settings-tool', [
@@ -55,7 +52,7 @@ class SettingsToolControllerTest extends TestCase
         //         'text' => '',
         //         'lastRetrievedLineNumber' => 10,
         //     ]);
-        
+
         $this->assertTrue(true);
     }
 
@@ -77,5 +74,4 @@ class SettingsToolControllerTest extends TestCase
     //         SettingsToolServiceProvider::class,
     //     ];
     // }
-
 }
