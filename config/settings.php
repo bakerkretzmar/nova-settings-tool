@@ -59,7 +59,7 @@ return [
                     'description' => 'App Facebook page URL.',
                     'link' => [
                         'text' => 'More.',
-                        'url' => '/documentation#facebook_url'
+                        'url' => '/documentation#facebook_url',
                     ],
                 ],
 
@@ -70,11 +70,11 @@ return [
                     'description' => 'App Twitter page URL.',
                     'link' => [
                         'text' => 'More.',
-                        'url' => '/documentation#twitter_url'
+                        'url' => '/documentation#twitter_url',
                     ],
                 ],
 
-            ]
+            ],
 
         ],
 
@@ -91,7 +91,7 @@ return [
                     'description' => 'Top secret new app feature.',
                     'link' => [
                         'text' => 'Documentation',
-                        'url' => '/documentation#new_feature'
+                        'url' => '/documentation#new_feature',
                     ],
                 ],
 
