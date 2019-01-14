@@ -17,14 +17,14 @@ class SettingsToolServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->publishes([
+            __DIR__.'/../config/settings.php' => config_path('settings.php'),
+        ]);
+
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'settings-tool');
 
         $this->app->booted(function () {
             $this->routes();
-        });
-
-        Nova::serving(function (ServingNova $event) {
-            //
         });
     }
 
@@ -42,15 +42,5 @@ class SettingsToolServiceProvider extends ServiceProvider
         Route::middleware(['nova', Authorize::class])
                 ->prefix('nova-vendor/settings-tool')
                 ->group(__DIR__.'/../routes/api.php');
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
     }
 }
