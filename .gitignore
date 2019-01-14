@@ -2,6 +2,5 @@
 /node_modules
 package-lock.json
 composer.lock
-phpunit.xml
 .phpunit.result.cache
 .DS_Store
