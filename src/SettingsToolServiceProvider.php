@@ -34,6 +34,10 @@ class SettingsToolServiceProvider extends ServiceProvider
      */
     protected function routes()
     {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/settings.php', 'settings'
+        );
+
         if ($this->app->routesAreCached()) {
             return;
         }
