@@ -2,9 +2,9 @@ A Laravel Nova tool to manage app settings
 ==========================================
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/bakerkretzmar/nova-settings-tool.svg?style=flat-square)](https://packagist.org/packages/bakerkretzmar/nova-settings-tool)
+[![Total Downloads](https://img.shields.io/packagist/dt/bakerkretzmar/nova-settings-tool.svg?style=flat-square)](https://packagist.org/packages/bakerkretzmar/nova-settings-tool)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![StyleCI](https://github.styleci.io/repos/165178010/shield?branch=master)](https://github.styleci.io/repos/165178010)<!-- Coverage?? -->
-<!-- [![Total Downloads](https://img.shields.io/packagist/dt/bakerkretzmar/nova-settings-tool.svg?style=flat-square)](https://packagist.org/packages/bakerkretzmar/nova-settings-tool) -->
 
 Store and edit simple app-wide settings right in Nova. Settings are stored as JSON using [`spatie/valuestore`](https://github.com/spatie/valuestore), making them really easy to [pull in and use everywhere else in your app](https://laravel-news.com/global-application-settings).
 
