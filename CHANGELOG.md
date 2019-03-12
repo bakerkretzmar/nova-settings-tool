@@ -2,6 +2,11 @@
 
 All notable changes to `nova-settings-tool` will be documented in this file
 
+## Unreleased
+
+- Allow JS translations
+- Fix tool's title customization
+
 ## 0.1.1 - 2019-01-13
 
 - Initial release
