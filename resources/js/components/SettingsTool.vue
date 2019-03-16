@@ -39,7 +39,7 @@
                         @click.native="saveAndReload(group.name)"
                         :processing="saving == group.name"
                     >
-                        Save
+                        {{ __('Save') }}
                     </progress-button>
                 </div>
 
@@ -104,7 +104,7 @@ export default {
                 .then((response) => {
                     if (response.status == 202) {
                         this.saving = ''
-                        this.$toasted.show('Settings saved!', { type: 'success' })
+                        this.$toasted.show(__('Settings saved'), { type: 'success' })
                     }
                 })
                 .catch((error) => {
