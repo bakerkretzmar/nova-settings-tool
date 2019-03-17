@@ -1,7 +1,7 @@
 <template>
     <div class="flex border-b border-40">
 
-        <setting-label>{{ name }}</setting-label>
+        <setting-label>{{ __(name) }}</setting-label>
 
         <div class="w-1/6 py-6 px-8">
 
@@ -15,7 +15,7 @@
 
         </div>
 
-        <setting-info :text="link.text || ''" :url="link.url || ''" class="py-6 px-8 w-1/2">{{ description }}</setting-info>
+        <setting-info :text="link.text || ''" :url="link.url || ''" class="py-6 px-8 w-1/2">{{ __(description) }}</setting-info>
 
     </div>
 </template>

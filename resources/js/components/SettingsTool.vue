@@ -7,7 +7,7 @@
 
         <div v-for="group in settingConfig">
 
-            <heading class="mb-6">{{ group.name }}</heading>
+            <heading class="mb-6">{{ __(group.name) }}</heading>
 
             <card class="relative overflow-hidden mb-8">
 
@@ -104,7 +104,7 @@ export default {
                 .then((response) => {
                     if (response.status == 202) {
                         this.saving = ''
-                        this.$toasted.show(__('Settings saved'), { type: 'success' })
+                        this.$toasted.show(__('Settings saved!'), { type: 'success' })
                     }
                 })
                 .catch((error) => {
