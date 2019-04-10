@@ -95,6 +95,17 @@ return [
                     ],
                 ],
 
+                [
+                    'key' => 'welcome_message',
+                    'name' => 'Welcome Message',
+                    'type' => 'textarea',
+                    'description' => 'Message for new users on their first login.',
+                    'link' => [
+                        'text' => 'Documentation',
+                        'url' => '/documentation#new_feature',
+                    ],
+                ],
+
             ],
 
         ],

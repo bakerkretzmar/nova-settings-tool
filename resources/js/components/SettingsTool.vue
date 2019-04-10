@@ -112,13 +112,13 @@ export default {
             })
 
             Nova.request().post('/nova-vendor/settings-tool', { settings: settingsToUpdate })
-                .then((response) => {
+                .then(response => {
                     if (response.status == 202) {
                         this.saving = ''
                         this.$toasted.show(__('Settings saved!'), { type: 'success' })
                     }
                 })
-                .catch((error) => {
+                .catch(error => {
                     console.log(error)
                     this.saving = ''
                 })
