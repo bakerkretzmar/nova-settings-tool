@@ -31,6 +31,15 @@
                         @input="handleInput"
                     />
 
+                    <text-area-setting
+                        v-if="setting.type == 'textarea'"
+                        :name="setting.name"
+                        :description="setting.description || ''"
+                        :link="setting.link || {}"
+                        :setting="{ key: setting.key, value: settings[setting.key] }"
+                        @input="handleInput"
+                    />
+
                 </div>
 
                 <div class="bg-30 flex px-8 py-4">
@@ -53,11 +62,13 @@
 <script>
 import ToggleSetting from './partials/Toggle'
 import TextSetting from './partials/Text'
+import TextAreaSetting from './partials/Textarea'
 
 export default {
     components: {
         ToggleSetting,
-        TextSetting
+        TextSetting,
+        TextAreaSetting
     },
 
     data: () => ({
