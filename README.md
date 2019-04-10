@@ -53,7 +53,15 @@ php artisan vendor:publish --tag="settings-tool"
 
 The [default config](config/settings.php) contains examples that should be pretty self-explanatory, and lots of comments in case they aren't.
 
-Each item in the `panels` array is rendered as its own 'group' of settings, like a panel on one of Nova's detail views. Each panel can have a name and contain settings, which are rendered as toggle switches or text inputs. Each setting can optionally have a description and a link to more information (e.g. docs). Only the setting's key and value are actually stored in your `settings.json` file.
+Each item in the `panels` array is rendered as its own 'group' of settings, like a panel on one of Nova's detail views. Each panel has a name and contains some settings. Each setting can optionally have a description and a link to more information (e.g. docs). Only the setting's key and value are actually stored in your `settings.json` file.
+
+There are three available setting types:
+
+| Type...    | ...displays            |
+| :--------- | :--------------------- |
+| `toggle`   | Boolean                |
+| `text`     | Single-line text input |
+| `textarea` | Multi-line text input  |
 
 All the strings hard-coded in this package (like in the "Save" button), as well as any you pass to it (like the `name` of any of your settings), can easily be translated using [Laravel's built-in localization features](https://laravel.com/docs/localization#using-translation-strings-as-keys).
 
