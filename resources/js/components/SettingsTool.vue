@@ -115,7 +115,7 @@ export default {
                 .then(response => {
                     if (response.status == 202) {
                         this.saving = ''
-                        this.$toasted.show(__('Settings saved!'), { type: 'success' })
+                        this.$toasted.show(this.__('Settings saved!'), { type: 'success' })
                     }
                 })
                 .catch(error => {
