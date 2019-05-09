@@ -2,17 +2,17 @@
 
 namespace Bakerkretzmar\SettingsTool;
 
-use Laravel\Nova\Nova;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\ServiceProvider;
 use Bakerkretzmar\SettingsTool\Http\Middleware\Authorize;
+
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
+
+use Laravel\Nova\Nova;
 
 class SettingsToolServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -29,8 +29,6 @@ class SettingsToolServiceProvider extends ServiceProvider
 
     /**
      * Register the tool's routes.
-     *
-     * @return void
      */
     protected function routes()
     {

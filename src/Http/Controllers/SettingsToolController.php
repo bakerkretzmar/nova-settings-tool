@@ -3,19 +3,29 @@
 namespace Bakerkretzmar\SettingsTool\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Spatie\Valuestore\Valuestore;
 use Illuminate\Routing\Controller;
+
+use Spatie\Valuestore\Valuestore;
 
 class SettingsToolController extends Controller
 {
-    /** @var string */
+    /**
+     * Path to the settings file on disk.
+     * @var string
+     */
     protected $settingsPath;
 
+    /**
+     * Create a new controller instance.
+     */
     public function __construct(string $settingsPath = null)
     {
         $this->settingsPath = $settingsPath ?? storage_path(config('settings.path', 'app/settings.json'));
     }
 
+    /**
+     * Retrieve and format settings from a file.
+     */
     public function read(Request $request)
     {
         $settings = Valuestore::make($this->settingsPath)->all();
@@ -36,6 +46,9 @@ class SettingsToolController extends Controller
         ]);
     }
 
+    /**
+     * Save updated settings to a file.
+     */
     public function write(Request $request)
     {
         $settings = Valuestore::make($this->settingsPath);

@@ -1,6 +1,6 @@
-/vendor
 /node_modules
-package-lock.json
-composer.lock
-.phpunit.result.cache
+/vendor
 .DS_Store
+.phpunit.result.cache
+composer.lock
+package-lock.json

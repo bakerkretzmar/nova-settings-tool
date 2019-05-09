@@ -2,7 +2,7 @@
 
 All notable changes to `nova-settings-tool` will be documented in this file.
 
-## 0.3.0 – 2019-04-09
+## 0.2.1 – 2019-04-09
 
 - Add `textarea` setting type ([#11](https://github.com/bakerkretzmar/nova-settings-tool/pull/11))
 - Fix bug translating the "Settings saved!" message

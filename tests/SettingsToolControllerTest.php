@@ -8,7 +8,6 @@ use Spatie\Valuestore\Valuestore;
 
 class SettingsToolControllerTest extends TestCase
 {
-
     public function setUp()
     {
         parent::setUp();
@@ -55,7 +54,7 @@ class SettingsToolControllerTest extends TestCase
         //         'text' => '',
         //         'lastRetrievedLineNumber' => 10,
         //     ]);
-        
+
         $this->assertTrue(true);
     }
 
@@ -77,5 +76,4 @@ class SettingsToolControllerTest extends TestCase
     //         SettingsToolServiceProvider::class,
     //     ];
     // }
-
 }
