@@ -2,12 +2,10 @@
 
 namespace Bakerkretzmar\SettingsTool;
 
-use Bakerkretzmar\SettingsTool\Http\Middleware\Authorize;
-
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Route;
-
 use Laravel\Nova\Nova;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
+use Bakerkretzmar\SettingsTool\Http\Middleware\Authorize;
 
 class SettingsToolServiceProvider extends ServiceProvider
 {
