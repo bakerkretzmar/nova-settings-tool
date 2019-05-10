@@ -9,7 +9,7 @@
                 :value="setting.value"
                 @input="input"
                 class="w-full form-control form-input form-input-bordered py-3 h-auto"
-                rows="5"
+                rows="6"
             />
 
             <setting-info v-if="description || link.text" :text="link.text || ''" :url="link.url || ''" class="pt-3">{{ __(description) }}</setting-info>

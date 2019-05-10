@@ -40,6 +40,16 @@
                         @input="handleInput"
                     />
 
+                    <code-setting
+                        v-if="setting.type == 'code'"
+                        :name="setting.name"
+                        :language="setting.language || 'javascript'"
+                        :description="setting.description || ''"
+                        :link="setting.link || {}"
+                        :setting="{ key: setting.key, value: settings[setting.key] }"
+                        @input="handleInput"
+                    />
+
                 </div>
 
                 <div class="bg-30 flex px-8 py-4">
@@ -63,12 +73,14 @@
 import ToggleSetting from './partials/Toggle'
 import TextSetting from './partials/Text'
 import TextAreaSetting from './partials/Textarea'
+import CodeSetting from './partials/Code'
 
 export default {
     components: {
         ToggleSetting,
         TextSetting,
-        TextAreaSetting
+        TextAreaSetting,
+        CodeSetting,
     },
 
     data: () => ({

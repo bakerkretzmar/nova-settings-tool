@@ -106,6 +106,18 @@ return [
                     ],
                 ],
 
+                [
+                    'key' => 'snippet',
+                    'name' => 'Code Snippet',
+                    'type' => 'code',
+                    'language' => 'javascript',
+                    'description' => 'Code to inject into the homepage.',
+                    'link' => [
+                        'text' => 'Documentation',
+                        'url' => '/documentation#new_feature',
+                    ],
+                ],
+
             ],
 
         ],
