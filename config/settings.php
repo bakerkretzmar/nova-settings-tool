@@ -96,6 +96,18 @@ return [
                 ],
 
                 [
+                    'key' => 'enabled_feature',
+                    'name' => 'Enabled Feature',
+                    'type' => 'toggle',
+                    'default' => true,
+                    'description' => 'Feature enabled by default.',
+                    'link' => [
+                        'text' => 'Documentation',
+                        'url' => '/documentation#new_feature',
+                    ],
+                ],
+
+                [
                     'key' => 'welcome_message',
                     'name' => 'Welcome Message',
                     'type' => 'textarea',

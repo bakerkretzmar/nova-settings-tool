@@ -34,7 +34,11 @@ class SettingsToolController extends Controller
         foreach ($settingConfig as $object) {
             foreach ($object['settings'] as $settingObject) {
                 if (! array_key_exists($settingObject['key'], $settings)) {
-                    $settings[$settingObject['key']] = $settingObject['type'] == 'toggle' ? false : '';
+                    if ($settingObject['type'] == 'toggle') {
+                        $settings[$settingObject['key']] = $settingObject['default'] ?? false;
+                    } else {
+                        $settings[$settingObject['key']] = '';
+                    }
                 }
             }
         }
