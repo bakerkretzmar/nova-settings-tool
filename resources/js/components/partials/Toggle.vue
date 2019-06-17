@@ -29,7 +29,7 @@ export default {
         name: String,
         setting: Object,
         description: String,
-        link: Object
+        link: Object,
     },
 
     components: {
@@ -59,7 +59,7 @@ export default {
     transition: .2s ease-out;
     border-radius: 1rem;
     cursor: pointer;
-    box-shadow: inset 0px 1px 2px rgba(0,0,0,0.15)
+    box-shadow: inset 0px 1px 2px rgba(0,0,0,0.15);
 }
 .slider::before {
     position: absolute;
