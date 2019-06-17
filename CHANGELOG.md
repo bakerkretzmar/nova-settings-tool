@@ -2,6 +2,11 @@
 
 All notable changes to `nova-settings-tool` will be documented in this file.
 
+## 0.3.2 – 2019-06-17
+
+- Add support for setting Toggle to be on by default
+- Tweak styles to more closely match the rest of Nova
+
 ## 0.3.1 – 2019-05-09
 
 - Add `code` setting type

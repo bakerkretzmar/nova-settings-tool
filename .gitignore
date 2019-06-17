@@ -1,6 +1,8 @@
 /node_modules
+/scratch
 /vendor
 .DS_Store
 .phpunit.result.cache
+notes.md
 composer.lock
 package-lock.json
