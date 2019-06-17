@@ -1,16 +1,27 @@
 <template>
-    <div class="flex items-center">
-        <p class="text-sm leading-normal text-80 italic">
-            <slot></slot> <a class="no-underline dim text-primary" :href="url" target="_blank">{{ __(text) }}</a>
-        </p>
-    </div>
+    <p class="text-sm leading-normal text-80 italic" v-html="text"></p>
 </template>
 
 <script>
 export default {
     props: {
         text: String,
-        url: String
     },
 }
 </script>
+
+<style>
+a {
+    color: var(--primary);
+    text-decoration-line: none;
+}
+
+a:hover,
+a:active {
+    opacity: 0.5;
+}
+
+a:active {
+    opacity: 0.8;
+}
+</style>

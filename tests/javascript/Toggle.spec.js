@@ -16,7 +16,6 @@ describe('Toggle', () => {
                     value: false,
                 },
                 description: 'Toggle setting',
-                link: {},
             },
             methods,
         })

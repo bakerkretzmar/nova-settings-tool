@@ -15,7 +15,8 @@ describe('Info', () => {
             methods,
         })
 
-        expect(wrapper.text()).toBe('Info about the setting')
+        expect(wrapper.text())
+            .toBe('Info about the setting')
     }),
 
     test('display link', () => {
@@ -26,7 +27,8 @@ describe('Info', () => {
             methods,
         })
 
-        expect(wrapper.find('.text-sm.text-80').html()).toBe('<p class="text-sm leading-normal text-80 italic">Info and a <a href="/docs">link to docs</a>.</p>')
+        expect(wrapper.html())
+            .toBe('<p class="text-sm leading-normal text-80 italic">Info and a <a href="/docs">link to docs</a>.</p>')
     })
 
 })

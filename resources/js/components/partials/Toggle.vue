@@ -1,21 +1,23 @@
 <template>
     <div class="flex border-b border-40">
 
-        <setting-label>{{ __(name) }}</setting-label>
+        <setting-label>
+            {{ __(name) }}
+        </setting-label>
 
         <div class="py-6 px-8">
 
             <div
                 class="toggle py-1"
                 :class="{ 'on' : setting.value }"
-                @click="toggle"
+                @click="$emit('toggle', setting.key)"
             >
                 <span class="slider"></span>
             </div>
 
         </div>
 
-        <setting-info :text="link.text || ''" :url="link.url || ''" class="py-6 w-1/2">{{ __(description) }}</setting-info>
+        <setting-info v-if="help" :text="__(help)" class="py-6 w-1/2"/>
 
     </div>
 </template>
@@ -28,20 +30,16 @@ export default {
     props: {
         name: String,
         setting: Object,
-        description: String,
-        link: Object,
+        help: {
+            type: String,
+            required: false,
+        },
     },
 
     components: {
         SettingLabel,
         SettingInfo
     },
-
-    methods: {
-        toggle(e) {
-            this.$emit('toggle', this.setting.key)
-        }
-    }
 }
 </script>
 
@@ -59,7 +57,6 @@ export default {
     transition: .2s ease-out;
     border-radius: 1rem;
     cursor: pointer;
-    box-shadow: inset 0px 1px 2px rgba(0,0,0,0.15);
 }
 .slider::before {
     position: absolute;
