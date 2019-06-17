@@ -2,7 +2,6 @@
 
 namespace Bakerkretzmar\SettingsTool;
 
-use Laravel\Nova\Nova;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Bakerkretzmar\SettingsTool\Http\Middleware\Authorize;
