@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-center">
-        <p class="text-80 leading-tight">
+        <p class="text-sm leading-normal text-80 italic">
             <slot></slot> <a class="no-underline dim text-primary" :href="url" target="_blank">{{ __(text) }}</a>
         </p>
     </div>
