@@ -5,16 +5,26 @@ namespace Bakerkretzmar\SettingsTool\Tests;
 use Bakerkretzmar\SettingsTool\SettingsToolServiceProvider;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         Route::middlewareGroup('nova', []);
+
+        Storage::fake();
+
+        Storage::put(
+            'app/settings.json',
+            file_get_contents(__DIR__.'/stubs/settings.json')
+        );
+
+        config(['settings' => include 'stubs/settings.php']);
     }
 
     protected function getPackageProviders($app)

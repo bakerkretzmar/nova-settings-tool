@@ -4,76 +4,115 @@ namespace Bakerkretzmar\SettingsTool\Tests;
 
 use Bakerkretzmar\SettingsTool\Http\Controllers\SettingsToolController;
 
+use Illuminate\Support\Facades\Storage;
+
 use Spatie\Valuestore\Valuestore;
 
 class SettingsToolControllerTest extends TestCase
 {
-    public function setUp()
+    /** @test */
+    public function read_settings_file()
     {
-        parent::setUp();
+        $response = $this->get('nova-vendor/settings-tool');
 
-        $this->app
-            ->when(SettingsToolController::class)
-            ->needs('$settingsPath')
-            ->give(__DIR__.'/stubs/settings.json');
+        $response->assertJsonFragment(['test_string' => 'Hello']);
     }
 
     /** @test */
-    function it_gets_the_settings()
+    public function read_settings_file_from_custom_path()
     {
-        $this
-            ->get('nova-vendor/settings-tool')
-            ->assertSuccessful()
-            ->assertJson(['test' => 'indeed']);
+        Storage::put(
+            'custom/configurations.json',
+            file_get_contents(__DIR__.'/stubs/settings.json')
+        );
+
+        config(['settings.path' => 'custom/configurations.json']);
+
+        $response = $this->get('nova-vendor/settings-tool');
+
+        $response->assertJsonFragment(['test_string' => 'Hello']);
     }
 
     /** @test */
-    function it_sets_the_settings()
+    public function read_settings_file_from_custom_disk()
     {
-        $this
-            ->postJson('nova-vendor/settings-tool', [
-                'settings' => [
-                    'test' => 'oh really?',
-                    'fact' => true,
-                ],
-            ])
-            ->assertSuccessful()
-            ->assertJson([
-                'test' => 'oh really?',
-                'fact' => true,
-            ]);
+        config(['filesystems.disks.custom' => [
+            'driver' => 'local',
+            'root' => storage_path('custom'),
+        ]]);
+
+        Storage::fake('custom');
+
+        Storage::disk('custom')->put(
+            'app/settings.json',
+            file_get_contents(__DIR__.'/stubs/settings.json')
+        );
+
+        config(['settings.disk' => 'custom']);
+
+        $response = $this->get('nova-vendor/settings-tool');
+
+        $response->assertJsonFragment(['test_string' => 'Hello']);
+    }
+
+/** @test */
+    public function read_settings_file_from_custom_path_and_disk()
+    {
+        config(['filesystems.disks.custom' => [
+            'driver' => 'local',
+            'root' => storage_path('custom'),
+        ]]);
+
+        Storage::fake('custom');
+
+        Storage::disk('custom')->put(
+            'folder/options.json',
+            file_get_contents(__DIR__.'/stubs/settings.json')
+        );
+
+        config(['settings.disk' => 'custom']);
+        config(['settings.path' => 'folder/options.json']);
+
+        $response = $this->get('nova-vendor/settings-tool');
+
+        $response->assertJsonFragment(['test_string' => 'Hello']);
     }
 
     /** @test */
-    public function it_will_start_from_the_ending_of_the_file_when_no_starting_line_number_is_given()
+    public function read_settings_values()
     {
-        // $this
-        //     ->postJson('nova-vendor/spatie/tail-tool')
-        //     ->assertSuccessful()
-        //     ->assertJson([
-        //         'text' => '',
-        //         'lastRetrievedLineNumber' => 10,
-        //     ]);
+        $response = $this->get('nova-vendor/settings-tool');
 
-        $this->assertTrue(true);
+        $response->assertSuccessful();
+        $response->assertJsonFragment(['test_string' => 'Hello']);
     }
 
     /** @test */
-    public function it_can_start_from_a_specific_line()
+    public function read_settings_config()
     {
-        $this
-            ->postJson('nova-vendor/spatie/tail-tool', ['afterLineNumber' => 8])
-            ->assertSuccessful()
-            ->assertJson([
-                'text' => 'nine'.PHP_EOL.'ten'.PHP_EOL,
-                'lastRetrievedLineNumber' => 10,
-            ]);
+        $response = $this->get('nova-vendor/settings-tool');
+
+        $response->assertJsonFragment(['name' => 'Test String']);
     }
 
-    // protected function getPackageProviders($app)
+    // set default settings values
+    // don't return values not in configs
+    // allow empty configs
+
+    /** @test */
+    // function it_sets_the_settings()
     // {
-    //     return [
-    //         SettingsToolServiceProvider::class,
-    //     ];
+    //     $this
+    //         ->postJson('nova-vendor/settings-tool', [
+    //             'settings' => [
+    //                 'test' => 'oh really?',
+    //                 'fact' => true,
+    //             ],
+    //         ])
+    //         ->assertSuccessful()
+    //         ->assertJson([
+    //             'test' => 'oh really?',
+    //             'fact' => true,
+    //         ]);
     // }
 }

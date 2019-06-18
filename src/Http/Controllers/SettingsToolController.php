@@ -3,24 +3,24 @@
 namespace Bakerkretzmar\SettingsTool\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Spatie\Valuestore\Valuestore;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
+
+use Spatie\Valuestore\Valuestore;
 
 class SettingsToolController extends Controller
 {
-    /**
-     * Path to the settings file on disk.
-     * @var string
-     */
-    protected $settingsPath;
+    /** @var string Path to settings. */
+    protected $disk;
 
-    /**
-     * Create a new controller instance.
-     */
-    public function __construct(string $settingsPath = null)
+    /** @var string Path to settings. */
+    protected $path;
+
+    public function __construct()
     {
-        $this->settingsPath = $settingsPath ?? storage_path(config('settings.path', 'app/settings.json'));
+        $this->disk = config('settings.disk', 'local');
+
+        $this->path = Storage::disk($this->disk)->path(config('settings.path', 'app/settings.json'));
     }
 
     /**
@@ -28,7 +28,7 @@ class SettingsToolController extends Controller
      */
     public function read(Request $request)
     {
-        $settings = Valuestore::make($this->settingsPath)->all();
+        $settings = Valuestore::make($this->path)->all();
 
         $settingConfig = config('settings.panels');
 
@@ -55,7 +55,7 @@ class SettingsToolController extends Controller
      */
     public function write(Request $request)
     {
-        $settings = Valuestore::make($this->settingsPath);
+        $settings = Valuestore::make($this->path);
 
         foreach ($request->all() as $setting => $value) {
             if ($value instanceof UploadedFile) {
