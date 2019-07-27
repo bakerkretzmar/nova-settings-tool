@@ -10,12 +10,11 @@ describe('Toggle', () => {
     test('emit toggle event with setting key when clicked', () => {
         const wrapper = shallowMount(Toggle, {
             propsData: {
-                name: 'toggle_setting',
+                label: 'toggle_setting',
                 setting: {
                     key: 'toggle_setting',
                     value: false,
                 },
-                description: 'Toggle setting',
             },
             methods,
         })
@@ -24,5 +23,4 @@ describe('Toggle', () => {
 
         expect(wrapper.emitted().toggle[0]).toEqual(['toggle_setting'])
     })
-
 })

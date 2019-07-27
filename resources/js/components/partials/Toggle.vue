@@ -2,7 +2,7 @@
     <div class="flex border-b border-40">
 
         <setting-label>
-            {{ __(name) }}
+            {{ __(label) }}
         </setting-label>
 
         <div class="py-6 px-8">
@@ -28,7 +28,7 @@ import SettingInfo from './Info'
 
 export default {
     props: {
-        name: String,
+        label: String,
         setting: Object,
         help: {
             type: String,
