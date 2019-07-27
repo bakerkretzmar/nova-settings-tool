@@ -1,17 +1,19 @@
 <template>
     <div class="flex border-b border-40">
 
-        <setting-label>{{ __(name) }}</setting-label>
+        <setting-label>
+            {{ __(label) }}
+        </setting-label>
 
         <div class="w-1/2 py-6 px-8">
 
             <input
-                :value="setting.value"
-                @input="input"
+                :value="setting.value || ''"
+                @input="$emit('input', { [setting.key]: $event.target.value })"
                 class="w-full form-control form-input form-input-bordered"
             />
 
-            <setting-info v-if="description || link.text" :text="link.text || ''" :url="link.url || ''" class="pt-3">{{ __(description) }}</setting-info>
+            <setting-info v-if="help" :text="__(help)" class="pt-3"/>
 
         </div>
 
@@ -24,24 +26,17 @@ import SettingInfo from './Info'
 
 export default {
     props: {
-        name: String,
+        label: String,
         setting: Object,
-        description: String,
-        link: Object
+        help: {
+            type: String,
+            required: false,
+        },
     },
 
     components: {
         SettingLabel,
         SettingInfo
     },
-
-    methods: {
-        input(e) {
-            this.$emit('input', {
-                key: this.setting.key,
-                value: e.target.value
-            })
-        }
-    }
 }
 </script>
