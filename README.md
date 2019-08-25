@@ -63,6 +63,7 @@ There are four available setting types:
 | `text`     | Single-line text input |
 | `textarea` | Multi-line text input  |
 | `code`     | Code snippet editor    |
+| `file`     | Single file input      |
 
 All the strings hard-coded in this package (like in the "Save" button), as well as any you pass to it (like the `name` of any of your settings), can easily be translated using [Laravel's built-in localization features](https://laravel.com/docs/localization#using-translation-strings-as-keys).
 

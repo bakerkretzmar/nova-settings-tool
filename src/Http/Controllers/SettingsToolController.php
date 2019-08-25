@@ -3,6 +3,7 @@
 namespace Bakerkretzmar\SettingsTool\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Spatie\Valuestore\Valuestore;
 use Illuminate\Routing\Controller;
 
@@ -56,8 +57,13 @@ class SettingsToolController extends Controller
     {
         $settings = Valuestore::make($this->settingsPath);
 
-        foreach ($request->settings as $setting => $value) {
-            $settings->put($setting, $value);
+        foreach ($request->all() as $setting => $value) {
+            if ($value instanceof UploadedFile) {
+                $value->storeAs('settings', $value->getClientOriginalName(), config('settings.files_disk'));
+                $settings->put($setting, $value->getClientOriginalName());
+            } else {
+                $settings->put($setting, $value);
+            }
         }
 
         return response($settings->all(), 202);

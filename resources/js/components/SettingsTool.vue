@@ -50,6 +50,15 @@
                         @input="handleInput"
                     />
 
+                   <file-setting
+                        v-if="setting.type == 'file'"
+                        :name="setting.name"
+                        :description="setting.description || ''"
+                        :link="setting.link || {}"
+                        :setting="{ key: setting.key, value: settings[setting.key] }"
+                        @input="handleFileInput"
+                   />
+
                 </div>
 
                 <div class="bg-30 flex px-8 py-4">
@@ -74,6 +83,7 @@ import ToggleSetting from './partials/Toggle'
 import TextSetting from './partials/Text'
 import TextAreaSetting from './partials/Textarea'
 import CodeSetting from './partials/Code'
+import FileSetting from './partials/File'
 
 export default {
     components: {
@@ -81,6 +91,7 @@ export default {
         TextSetting,
         TextAreaSetting,
         CodeSetting,
+        FileSetting,
     },
 
     data: () => ({
@@ -88,6 +99,7 @@ export default {
         saving: '',
         settings: {},
         settingConfig: [],
+        files: new FormData(),
     }),
 
     mounted() {
@@ -110,20 +122,28 @@ export default {
             this.settings[input.key] = input.value
         },
 
+        handleFileInput(input) {
+            this.files.set(input.key, input.value)
+        },
+
         saveAndReload(groupName) {
             this.saving = groupName
 
-            let settingsToUpdate = {}
+            const settingsToUpdate = new FormData()
 
             let keys = this.settingConfig
                 .filter(g => g.name == groupName)[0].settings
                 .map(settingItem => settingItem.key)
 
             keys.forEach(key => {
-                settingsToUpdate[key] = this.settings[key]
+                settingsToUpdate.set(key, this.settings[key])
             })
 
-            Nova.request().post('/nova-vendor/settings-tool', { settings: settingsToUpdate })
+            for (const file of this.files.entries()) {
+                settingsToUpdate.set(file[0], file[1])
+            }
+
+            Nova.request().post('/nova-vendor/settings-tool', settingsToUpdate)
                 .then(response => {
                     if (response.status == 202) {
                         this.saving = ''
