@@ -71,9 +71,10 @@ class SettingsToolController extends Controller
     }
 
     /**
-     * Retrieve the config for a specified key
+     * Retrieve the config for a specified key.
      */
-    public function getSettingObject(string $key) {
+    public function getSettingObject(string $key)
+    {
         $settingConfig = config('settings.panels');
 
         foreach ($settingConfig as $object) {
@@ -83,7 +84,5 @@ class SettingsToolController extends Controller
                 }
             }
         }
-
-        return null;
     }
 }
