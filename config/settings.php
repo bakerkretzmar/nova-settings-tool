@@ -130,6 +130,19 @@ return [
                     ],
                 ],
 
+                [
+                    'key' => 'file',
+                    'name' => 'File',
+                    'type' => 'file',
+                    'disk' => 'local',
+                    'path' => 'settings',
+                    'description' => 'File to upload and save at a specified location.',
+                    'link' => [
+                        'text' => 'Documentation',
+                        'url' => '/documentation#new_feature',
+                    ],
+                ],
+
             ],
 
         ],
