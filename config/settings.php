@@ -18,19 +18,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Files Disk
-    |--------------------------------------------------------------------------
-    |
-    | This is the filesystem disk where your files are stored.
-    |
-    | Defaults to 'local' if not specified here.
-    |
-    */
-
-    'files_disk' => 'local',
-
-    /*
-    |--------------------------------------------------------------------------
     | Navigation Title
     |--------------------------------------------------------------------------
     |
@@ -137,6 +124,19 @@ return [
                     'type' => 'code',
                     'language' => 'javascript',
                     'description' => 'Code to inject into the homepage.',
+                    'link' => [
+                        'text' => 'Documentation',
+                        'url' => '/documentation#new_feature',
+                    ],
+                ],
+
+                [
+                    'key' => 'file',
+                    'name' => 'File',
+                    'type' => 'file',
+                    'disk' => 'local',
+                    'path' => 'settings',
+                    'description' => 'File to upload and save at a specified location.',
                     'link' => [
                         'text' => 'Documentation',
                         'url' => '/documentation#new_feature',

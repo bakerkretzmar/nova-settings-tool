@@ -59,13 +59,31 @@ class SettingsToolController extends Controller
 
         foreach ($request->all() as $setting => $value) {
             if ($value instanceof UploadedFile) {
-                $value->storeAs('settings', $value->getClientOriginalName(), config('settings.files_disk'));
-                $settings->put($setting, $value->getClientOriginalName());
+                $settingObject = $this->getSettingObject($setting);
+
+                $settings->put($setting, $value->storeAs($settingObject['path'], $value->getClientOriginalName(), $settingObject['disk']));
             } else {
                 $settings->put($setting, $value);
             }
         }
 
         return response($settings->all(), 202);
+    }
+
+    /**
+     * Retrieve the config for a specified key
+     */
+    public function getSettingObject(string $key) {
+        $settingConfig = config('settings.panels');
+
+        foreach ($settingConfig as $object) {
+            foreach ($object['settings'] as $settingObject) {
+                if ($settingObject['key'] === $key) {
+                    return $settingObject;
+                }
+            }
+        }
+
+        return null;
     }
 }
