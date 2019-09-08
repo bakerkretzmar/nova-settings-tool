@@ -58,10 +58,12 @@ class SettingsToolController extends Controller
         $settings = Valuestore::make($this->settingsPath);
 
         foreach ($request->all() as $setting => $value) {
-            if ($value instanceof UploadedFile) {
-                $settingObject = $this->getSettingObject($setting);
+            $settingObject = $this->getSettingObject($setting);
 
+            if ($settingObject['type'] === 'file' && $value instanceof UploadedFile) {
                 $settings->put($setting, $value->storeAs($settingObject['path'], $value->getClientOriginalName(), $settingObject['disk']));
+            } else if ($settingObject['type'] === 'toggle') {
+                $settings->put($setting, $value === 'true');
             } else {
                 $settings->put($setting, $value);
             }
@@ -73,7 +75,8 @@ class SettingsToolController extends Controller
     /**
      * Retrieve the config for a specified key
      */
-    public function getSettingObject(string $key) {
+    public function getSettingObject(string $key)
+    {
         $settingConfig = config('settings.panels');
 
         foreach ($settingConfig as $object) {
