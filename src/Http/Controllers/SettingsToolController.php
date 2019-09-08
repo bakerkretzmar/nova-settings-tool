@@ -62,7 +62,7 @@ class SettingsToolController extends Controller
 
             if ($settingObject['type'] === 'file' && $value instanceof UploadedFile) {
                 $settings->put($setting, $value->storeAs($settingObject['path'], $value->getClientOriginalName(), $settingObject['disk']));
-            } else if ($settingObject['type'] === 'toggle') {
+            } elseif ($settingObject['type'] === 'toggle') {
                 $settings->put($setting, $value === 'true');
             } else {
                 $settings->put($setting, $value);
@@ -73,7 +73,7 @@ class SettingsToolController extends Controller
     }
 
     /**
-     * Retrieve the config for a specified key
+     * Retrieve the config for a specified key.
      */
     public function getSettingObject(string $key)
     {
@@ -86,7 +86,5 @@ class SettingsToolController extends Controller
                 }
             }
         }
-
-        return null;
     }
 }
