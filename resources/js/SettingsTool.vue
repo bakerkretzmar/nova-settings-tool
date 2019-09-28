@@ -1,36 +1,44 @@
 <template>
-    <div class="relative">
+    <div>
 
-        <div v-if="loading" class="rounded-lg flex items-center justify-center absolute pin z-50 bg-40 -m-4">
-            <loader class="text-60" />
-        </div>
+        <!-- <div v-for="group in settingConfig"> -->
 
-        <div v-for="group in settingConfig">
-
-            <heading class="mb-6">{{ __(group.name) }}</heading>
+            <!-- <heading class="mb-6">
+                {{ __(group.name) }}
+            </heading> -->
+            <heading class="mb-6">
+                Settings
+            </heading>
 
             <card class="relative overflow-hidden mb-8">
 
-                <div v-for="setting in group.settings">
+                <!-- <div v-for="setting in group.settings"> -->
 
-                    <toggle-setting
+                   <!--  <toggle-setting
                         v-if="setting.type == 'toggle'"
                         :name="setting.name"
                         :description="setting.description || ''"
                         :link="setting.link || {}"
                         :setting="{ key: setting.key, value: settings[setting.key] }"
                         @toggle="handleToggle"
+                    /> -->
+
+                    <!-- The API I *really want*: -->
+
+                    <component
+                        v-for="setting in settings"
+                        :key="setting.key"
+                        :is="`${setting.type}-setting`"
+                        :setting="setting"
+                        @update="updateSetting"
                     />
 
-                    <text-setting
+<!--                     <text-setting
                         v-if="setting.type == 'text'"
-                        :name="setting.name"
-                        :description="setting.description || ''"
-                        :link="setting.link || {}"
-                        :setting="{ key: setting.key, value: settings[setting.key] }"
-                        @input="handleInput"
-                    />
-
+                        :setting="setting"
+                        @input="settings[$event.key] = $event.value"
+                    /> -->
+<!--
                     <text-area-setting
                         v-if="setting.type == 'textarea'"
                         :name="setting.name"
@@ -38,9 +46,9 @@
                         :link="setting.link || {}"
                         :setting="{ key: setting.key, value: settings[setting.key] }"
                         @input="handleInput"
-                    />
+                    /> -->
 
-                    <code-setting
+<!--                     <code-setting
                         v-if="setting.type == 'code'"
                         :name="setting.name"
                         :language="setting.language || 'javascript'"
@@ -49,9 +57,9 @@
                         :setting="{ key: setting.key, value: settings[setting.key] }"
                         @input="handleInput"
                     />
-
-                </div>
-
+ -->
+                <!-- </div> -->
+<!--
                 <div class="bg-30 flex px-8 py-4">
                     <progress-button
                         class="ml-auto"
@@ -60,11 +68,11 @@
                     >
                         {{ __('Save') }}
                     </progress-button>
-                </div>
+                </div> -->
 
             </card>
 
-        </div>
+        <!-- </div> -->
 
     </div>
 </template>
@@ -84,24 +92,21 @@ export default {
     },
 
     data: () => ({
-        loading: true,
         saving: '',
         settings: {},
         settingConfig: [],
     }),
 
     mounted() {
-        const vm = this
-
         Nova.request().get('/nova-vendor/settings-tool')
-            .then(response => {
-                vm.settingConfig = response.data.settingConfig
-                vm.settings = response.data.settings
-                setTimeout(() => { vm.loading = false }, 200)
-            })
+            .then(res => this.settings = res.data)
     },
 
     methods: {
+        updateSetting(data) {
+            this.settings[data.key] = data.value
+        },
+
         handleToggle(key) {
             this.settings[key] = !this.settings[key]
         },

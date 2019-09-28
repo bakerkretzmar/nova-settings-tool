@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import TextSetting from '@/Text'
+import TextSetting from '@/TextSetting'
 
 describe('Text Setting', () => {
 
@@ -43,7 +43,7 @@ describe('Text Setting', () => {
         wrapper.find('.form-input').setValue('New value')
         wrapper.find('.form-input').trigger('input')
 
-        expect(wrapper.emitted().input[0])
+        expect(wrapper.emitted().update[0])
             .toEqual([
                 {
                     key: 'text_setting',

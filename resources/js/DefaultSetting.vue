@@ -13,11 +13,11 @@
 
             <slot name="setting"/>
 
-            <setting-help class="error-text mt-2 text-danger" v-if="errors.length">
+            <setting-help class="error-text text-danger" v-if="errors.length">
                 {{ errors[0] }}
             </setting-help>
 
-            <setting-help class="mt-2" v-if="setting.help">
+            <setting-help v-if="setting.help">
                 {{ __(setting.help) }}
             </setting-help>
 

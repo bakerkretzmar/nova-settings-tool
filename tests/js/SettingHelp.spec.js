@@ -17,12 +17,12 @@ describe('SettingHelp', () => {
     it('can render HTML help text', () => {
         let wrapper = shallowMount(SettingHelp, {
             slots: {
-                default: 'Read more about this fancy setting in <a href="/docs">the docs</a>.',
+                default: 'Read more about this fancy setting in &lt;a href="/docs"&gt;the docs&lt;/a&gt;.',
             },
         })
 
         expect(wrapper.html())
-            .toBe('<div class="help-text">Read more about this fancy setting in <a href="/docs">the docs</a>.</div>')
+            .toBe('<div class="help-text mt-2">Read more about this fancy setting in <a href="/docs">the docs</a>.</div>')
     })
 
 })

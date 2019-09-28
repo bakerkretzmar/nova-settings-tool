@@ -6,7 +6,11 @@
             <input
                 :id="setting.key"
                 :value="setting.value"
-                @input="$emit('input', { key: setting.key, value: $event.target.value })"
+                @input="$emit('update', {
+                    key: setting.key,
+                    value: $event.target.value,
+                })"
+                :placeholder="setting.default"
                 class="w-full form-control form-input form-input-bordered"
             />
 
