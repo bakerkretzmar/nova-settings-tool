@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import Info from '@/partials/Info'
+import Info from '@/Info'
 
 describe('Info', () => {
 
@@ -7,7 +7,7 @@ describe('Info', () => {
         __: (s) => s,
     }
 
-    test('display text', () => {
+    it('can display text', () => {
         let wrapper = shallowMount(Info, {
             propsData: {
                 text: 'Info about the setting',
@@ -19,7 +19,7 @@ describe('Info', () => {
             .toBe('Info about the setting')
     }),
 
-    test('display link', () => {
+    it('can display link', () => {
         let wrapper = shallowMount(Info, {
             propsData: {
                 text: 'Info and a <a href="/docs">link to docs</a>.',

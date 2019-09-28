@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import Label from '@/partials/Label'
+import Label from '@/Label'
 
 describe('Label', () => {
 

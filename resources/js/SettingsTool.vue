@@ -79,11 +79,11 @@
 </template>
 
 <script>
-import ToggleSetting from './partials/Toggle'
-import TextSetting from './partials/Text'
-import TextAreaSetting from './partials/Textarea'
-import CodeSetting from './partials/Code'
-import FileSetting from './partials/File'
+import ToggleSetting from './Toggle'
+import TextSetting from './Text'
+import TextAreaSetting from './Textarea'
+import CodeSetting from './Code'
+import FileSetting from './File'
 
 export default {
     components: {

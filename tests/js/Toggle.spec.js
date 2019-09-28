@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import Toggle from '@/partials/Toggle'
+import Toggle from '@/Toggle'
 
 describe('Toggle', () => {
 

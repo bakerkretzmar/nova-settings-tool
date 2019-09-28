@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import Text from '@/partials/Text'
+import Text from '@/Text'
 
 describe('Text', () => {
 
