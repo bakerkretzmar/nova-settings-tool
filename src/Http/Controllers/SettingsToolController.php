@@ -1,6 +1,6 @@
 <?php
 
-namespace Bakerkretzmar\SettingsTool\Http\Controllers;
+namespace Bakerkretzmar\NovaSettingsTool\Http\Controllers;
 
 use Illuminate\Http\Request;
 
@@ -57,9 +57,9 @@ class SettingsToolController
      * Retrieve the config for a specified key
      */
     public function getSettingObject(string $key) {
-        $settingConfig = config('settings.panels');
+        $config = config('nova-settings-tool.panels');
 
-        foreach ($settingConfig as $object) {
+        foreach ($config as $object) {
             foreach ($object['settings'] as $settingObject) {
                 if ($settingObject['key'] === $key) {
                     return $settingObject;
