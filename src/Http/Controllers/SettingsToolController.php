@@ -3,12 +3,10 @@
 namespace Bakerkretzmar\SettingsTool\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Storage;
 
 use Spatie\Valuestore\Valuestore;
 
-class SettingsToolController extends Controller
+class SettingsToolController
 {
     protected $store;
 
@@ -19,31 +17,20 @@ class SettingsToolController extends Controller
         );
     }
 
-    /**
-     * Retrieve and format settings from a file.
-     */
-    public function read(Request $request)
+    public function read()
     {
-        $settings = Valuestore::make($this->path)->all();
+        $values = $this->store->all();
 
-        $settingConfig = config('settings.panels');
+        $settings = collect(config('nova-settings-tool.settings'))
+            ->map(function ($setting) use ($values) {
+                return array_merge([
+                    'type' => 'text',
+                    'label' => $setting['key'],
+                    'value' => $values[$setting['key']] ?? null,
+                ], $setting);
+            })->all();
 
-        foreach ($settingConfig as $object) {
-            foreach ($object['settings'] as $settingObject) {
-                if (! array_key_exists($settingObject['key'], $settings)) {
-                    if ($settingObject['type'] == 'toggle') {
-                        $settings[$settingObject['key']] = $settingObject['default'] ?? false;
-                    } else {
-                        $settings[$settingObject['key']] = '';
-                    }
-                }
-            }
-        }
-
-        return response()->json([
-            'settings' => $settings,
-            'settingConfig' => $settingConfig,
-        ]);
+        return response()->json($settings);
     }
 
     /**
@@ -51,7 +38,7 @@ class SettingsToolController extends Controller
      */
     public function write(Request $request)
     {
-        $settings = Valuestore::make($this->path);
+        $settings = $this->store;
 
         foreach ($request->all() as $setting => $value) {
             if ($value instanceof UploadedFile) {
