@@ -10,7 +10,7 @@
                     key: setting.key,
                     value: $event.target.value,
                 })"
-                :placeholder="setting.default"
+                :placeholder="setting.placeholder"
                 class="w-full form-control form-input form-input-bordered py-3 h-auto"
                 rows="6"
             />
