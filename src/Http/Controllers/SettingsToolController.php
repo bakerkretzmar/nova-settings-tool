@@ -25,7 +25,7 @@ class SettingsToolController
             ->map(function ($setting) use ($values) {
                 return array_merge([
                     'type' => 'text',
-                    'label' => $setting['key'],
+                    'label' => ucfirst($setting['key']),
                     'value' => $values[$setting['key']] ?? null,
                 ], $setting);
             })
