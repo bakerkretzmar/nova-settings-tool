@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import SettingLabel from './Label'
-import SettingInfo from './Info'
+import SettingLabel from './SettingLabel'
+import SettingInfo from './SettingHelp'
 import SettingWrapper from './SettingWrapper'
 
 import CodeMirror from 'codemirror'
