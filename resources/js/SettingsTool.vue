@@ -50,15 +50,6 @@
                         @input="handleInput"
                     />
 
-                   <file-setting
-                        v-if="setting.type == 'file'"
-                        :name="setting.name"
-                        :description="setting.description || ''"
-                        :link="setting.link || {}"
-                        :setting="{ key: setting.key, value: settings[setting.key] }"
-                        @input="handleFileInput"
-                   />
-
                 </div>
 
                 <div class="bg-30 flex px-8 py-4">
@@ -80,10 +71,9 @@
 
 <script>
 import ToggleSetting from './Toggle'
-import TextSetting from './Text'
+import TextSetting from './TextSetting'
 import TextAreaSetting from './Textarea'
 import CodeSetting from './Code'
-import FileSetting from './File'
 
 export default {
     components: {
@@ -91,7 +81,6 @@ export default {
         TextSetting,
         TextAreaSetting,
         CodeSetting,
-        FileSetting,
     },
 
     data: () => ({
@@ -99,7 +88,6 @@ export default {
         saving: '',
         settings: {},
         settingConfig: [],
-        files: new FormData(),
     }),
 
     mounted() {
@@ -122,10 +110,6 @@ export default {
             this.settings[input.key] = input.value
         },
 
-        handleFileInput(input) {
-            this.files.set(input.key, input.value)
-        },
-
         saveAndReload(groupName) {
             this.saving = groupName
 
@@ -138,10 +122,6 @@ export default {
             keys.forEach(key => {
                 settingsToUpdate.set(key, this.settings[key])
             })
-
-            for (const file of this.files.entries()) {
-                settingsToUpdate.set(file[0], file[1])
-            }
 
             Nova.request().post('/nova-vendor/settings-tool', settingsToUpdate)
                 .then(response => {
