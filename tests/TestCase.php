@@ -24,7 +24,7 @@ abstract class TestCase extends Orchestra
             file_get_contents(__DIR__.'/stubs/settings.json')
         );
 
-        config(['settings' => include 'stubs/settings.php']);
+        config(['nova-settings-tool' => include 'stubs/nova-settings-tool.php']);
     }
 
     protected function getPackageProviders($app)

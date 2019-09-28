@@ -2,9 +2,27 @@
 
 return [
 
-    // 'path' => __DIR__ . '/settings.json',
+    'sidebar-label' => 'Configuration',
 
-    'navigation' => 'Settings',
+    'settings' => [
+
+        [
+            'type' => 'text',
+            'key' => 'facebook_url',
+            'label' => 'Facebook',
+            'help' => 'App Twitter page URL. <a href="#">Read more.</a>',
+            'default' => 'jacobbakr',
+        ],
+
+        [
+            'key' => 'test_setting',
+        ],
+
+        [
+            'key' => 'setting_with_no_metadata',
+        ],
+
+    ],
 
     'panels' => [
 

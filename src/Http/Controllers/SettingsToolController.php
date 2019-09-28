@@ -10,17 +10,13 @@ use Spatie\Valuestore\Valuestore;
 
 class SettingsToolController extends Controller
 {
-    /** @var string Path to settings. */
-    protected $disk;
-
-    /** @var string Path to settings. */
-    protected $path;
+    protected $store;
 
     public function __construct()
     {
-        $this->disk = config('settings.disk', 'local');
-
-        $this->path = Storage::disk($this->disk)->path(config('settings.path', 'app/settings.json'));
+        $this->store = Valuestore::make(
+            storage_path(config('nova-settings-tool.path', 'app/settings.json'))
+        );
     }
 
     /**

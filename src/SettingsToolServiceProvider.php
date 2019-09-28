@@ -14,8 +14,8 @@ class SettingsToolServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/settings.php' => config_path('settings.php'),
-        ], 'settings-tool');
+            __DIR__ . '/../config/nova-settings-tool.php' => config_path('nova-settings-tool.php'),
+        ], 'nova-settings-tool');
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'settings-tool');
 
