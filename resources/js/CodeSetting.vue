@@ -1,39 +1,21 @@
 <template>
-    <setting-wrapper>
+    <default-setting :setting="setting" :errors="errors || []">
 
-        <setting-label>
-            {{ __(name) }}
-        </setting-label>
-
-        <div class="w-3/4 py-6 px-8">
+        <template slot="setting">
 
             <div class="form-input-bordered px-0 overflow-hidden">
-
-                <textarea ref="textarea"/>
-
+                <textarea ref="textarea" :id="setting.key"/>
             </div>
 
-            <setting-info
-                v-if="description || link.text"
-                :text="link.text || ''"
-                :url="link.url || ''"
-                class="pt-3"
-            >
-                {{ __(description) }}
-            </setting-info>
+        </template>
 
-        </div>
-
-    </setting-wrapper>
+    </default-setting>
 </template>
 
 <script>
-import SettingLabel from './SettingLabel'
-import SettingInfo from './SettingHelp'
-import SettingWrapper from './SettingWrapper'
+import DefaultSetting from './DefaultSetting'
 
 import CodeMirror from 'codemirror'
-
 import 'codemirror/mode/php/php'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/css/css'
@@ -43,18 +25,11 @@ import 'codemirror/mode/yaml/yaml'
 import 'codemirror/mode/shell/shell'
 
 export default {
-    props: {
-        name: String,
-        setting: Object,
-        description: String,
-        language: String,
-        link: Object
-    },
+    components: { DefaultSetting },
 
-    components: {
-        SettingLabel,
-        SettingInfo,
-        SettingWrapper
+    props: {
+        setting: Object,
+        errors: Array,
     },
 
     data: () => ({
@@ -71,19 +46,19 @@ export default {
         this.codemirror = CodeMirror.fromTextArea(this.$refs.textarea, {
             indentUnit: 4,
             lineNumbers: true,
-            mode: this.language,
+            mode: this.setting.language,
             theme: 'solarized light',
             viewportMargin: Infinity,
         })
 
+        this.doc.setValue(this.setting.value || '')
+
         this.doc.on('change', (cm, change) => {
-            this.$emit('input', {
+            this.$emit('update', {
                 key: this.setting.key,
                 value: cm.getValue(),
             })
         })
-
-        this.doc.setValue(this.setting.value || '')
     },
 }
 </script>
@@ -96,7 +71,7 @@ export default {
 
 .CodeMirror {
     font-family: "Fira Code", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.75;
     font-weight: 500;
     -moz-box-shadow: none !important;

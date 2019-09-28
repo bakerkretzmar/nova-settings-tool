@@ -22,16 +22,6 @@
                         @update="updateSetting"
                     />
 
-<!--                     <code-setting
-                        v-if="setting.type == 'code'"
-                        :name="setting.name"
-                        :language="setting.language || 'javascript'"
-                        :description="setting.description || ''"
-                        :link="setting.link || {}"
-                        :setting="{ key: setting.key, value: settings[setting.key] }"
-                        @input="handleInput"
-                    />
- -->
                 <!-- </div> -->
 
             </card>
@@ -48,7 +38,7 @@
 </template>
 
 <script>
-import CodeSetting from './Code'
+import CodeSetting from './CodeSetting'
 import TextSetting from './TextSetting'
 import TextareaSetting from './TextareaSetting'
 import ToggleSetting from './ToggleSetting'
