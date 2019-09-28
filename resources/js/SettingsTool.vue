@@ -33,21 +33,6 @@
                         @update="updateSetting"
                     />
 
-<!--                     <text-setting
-                        v-if="setting.type == 'text'"
-                        :setting="setting"
-                        @input="settings[$event.key] = $event.value"
-                    /> -->
-<!--
-                    <text-area-setting
-                        v-if="setting.type == 'textarea'"
-                        :name="setting.name"
-                        :description="setting.description || ''"
-                        :link="setting.link || {}"
-                        :setting="{ key: setting.key, value: settings[setting.key] }"
-                        @input="handleInput"
-                    /> -->
-
 <!--                     <code-setting
                         v-if="setting.type == 'code'"
                         :name="setting.name"
@@ -78,16 +63,16 @@
 </template>
 
 <script>
+import CodeSetting from './Code'
 import ToggleSetting from './Toggle'
 import TextSetting from './TextSetting'
-import TextAreaSetting from './Textarea'
-import CodeSetting from './Code'
+import TextareaSetting from './TextareaSetting'
 
 export default {
     components: {
         ToggleSetting,
         TextSetting,
-        TextAreaSetting,
+        TextareaSetting,
         CodeSetting,
     },
 
