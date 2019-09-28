@@ -1,8 +1,6 @@
 <template>
     <div>
 
-        <!-- <div v-for="group in settingConfig"> -->
-
             <!-- <heading class="mb-6">
                 {{ __(group.name) }}
             </heading> -->
@@ -35,20 +33,16 @@
                     />
  -->
                 <!-- </div> -->
-<!--
-                <div class="bg-30 flex px-8 py-4">
-                    <progress-button
-                        class="ml-auto"
-                        @click.native="saveAndReload(group.name)"
-                        :processing="saving == group.name"
-                    >
-                        {{ __('Save') }}
-                    </progress-button>
-                </div> -->
 
             </card>
 
-        <!-- </div> -->
+            <div class="flex items-center">
+
+                <progress-button class="ml-auto" @click.native="saveSettings" :processing="saving">
+                    {{ __('Save') }}
+                </progress-button>
+
+            </div>
 
     </div>
 </template>
@@ -68,14 +62,13 @@ export default {
     },
 
     data: () => ({
-        saving: '',
+        saving: false,
         settings: {},
-        settingConfig: [],
     }),
 
     mounted() {
         Nova.request().get('/nova-vendor/settings-tool')
-            .then(res => this.settings = res.data)
+            .then(response => this.settings = response.data)
     },
 
     methods: {
@@ -83,37 +76,19 @@ export default {
             this.settings[data.key].value = data.value
         },
 
-        handleToggle(key) {
-            this.settings[key] = !this.settings[key]
-        },
+        saveSettings() {
+            this.saving = true
 
-        handleInput(input) {
-            this.settings[input.key] = input.value
-        },
+            let settings = _.mapValues(this.settings, 'value')
 
-        saveAndReload(groupName) {
-            this.saving = groupName
-
-            const settingsToUpdate = new FormData()
-
-            let keys = this.settingConfig
-                .filter(g => g.name == groupName)[0].settings
-                .map(settingItem => settingItem.key)
-
-            keys.forEach(key => {
-                settingsToUpdate.set(key, this.settings[key])
-            })
-
-            Nova.request().post('/nova-vendor/settings-tool', settingsToUpdate)
+            Nova.request().post('/nova-vendor/settings-tool', settings)
                 .then(response => {
-                    if (response.status == 202) {
-                        this.saving = ''
-                        this.$toasted.show(this.__('Settings saved!'), { type: 'success' })
-                    }
+                    this.saving = false
+                    this.$toasted.show(this.__('Settings saved!'), { type: 'success' })
                 })
                 .catch(error => {
-                    console.log(error)
-                    this.saving = ''
+                    this.saving = false
+                    console.log(error.response)
                 })
         }
     }

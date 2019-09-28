@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 class SettingsToolControllerTest extends TestCase
 {
     /** @test */
-    public function can_retrieve_settings()
+    public function can_read_settings()
     {
         $response = $this->get('nova-vendor/settings-tool');
 
@@ -19,7 +19,7 @@ class SettingsToolControllerTest extends TestCase
     }
 
     /** @test */
-    public function can_retrieve_settings_from_custom_path()
+    public function can_read_settings_from_custom_path()
     {
         Storage::put(
             'custom/configurations.json',
@@ -38,7 +38,7 @@ class SettingsToolControllerTest extends TestCase
     }
 
     /** @test */
-    public function can_set_default_setting_metadata_automatically()
+    public function can_fill_default_setting_metadata_automatically()
     {
         $response = $this->get('nova-vendor/settings-tool');
 
@@ -50,25 +50,15 @@ class SettingsToolControllerTest extends TestCase
         ]);
     }
 
-    // DON'T set default settings values
-    // handle missing values
-    // don't return values not in configs
-    // allow empty configs
-
     /** @test */
-    // function it_sets_the_settings()
-    // {
-    //     $this
-    //         ->postJson('nova-vendor/settings-tool', [
-    //             'settings' => [
-    //                 'test' => 'oh really?',
-    //                 'fact' => true,
-    //             ],
-    //         ])
-    //         ->assertSuccessful()
-    //         ->assertJson([
-    //             'test' => 'oh really?',
-    //             'fact' => true,
-    //         ]);
-    // }
+    public function can_write_settings()
+    {
+        $response = $this->postJson('nova-vendor/settings-tool', [
+            'test_setting' => 'http://google.ca',
+        ]);
+
+        $response->assertSuccessful();
+        $this->assertArrayHasKey('test_setting', json_decode(Storage::get('settings.json'), true));
+        $this->assertSame('http://google.ca', json_decode(Storage::get('settings.json'), true)['test_setting']);
+    }
 }

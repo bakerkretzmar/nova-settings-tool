@@ -35,40 +35,12 @@ class SettingsToolController
         return response()->json($settings);
     }
 
-    /**
-     * Save updated settings to a file.
-     */
     public function write(Request $request)
     {
-        $settings = $this->store;
-
-        foreach ($request->all() as $setting => $value) {
-            if ($value instanceof UploadedFile) {
-                $settingObject = $this->getSettingObject($setting);
-
-                $settings->put($setting, $value->storeAs($settingObject['path'], $value->getClientOriginalName(), $settingObject['disk']));
-            } else {
-                $settings->put($setting, $value);
-            }
+        foreach ($request->all() as $key => $value) {
+            $this->store->put($key, $value);
         }
 
-        return response($settings->all(), 202);
-    }
-
-    /**
-     * Retrieve the config for a specified key
-     */
-    public function getSettingObject(string $key) {
-        $config = config('nova-settings-tool.panels');
-
-        foreach ($config as $object) {
-            foreach ($object['settings'] as $settingObject) {
-                if ($settingObject['key'] === $key) {
-                    return $settingObject;
-                }
-            }
-        }
-
-        return null;
+        return response()->json();
     }
 }
