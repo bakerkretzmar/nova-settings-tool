@@ -1,10 +1,11 @@
 <template>
-    <default-setting :setting="setting">
+    <default-setting :setting="setting" :errors="[]">
 
         <template slot="setting">
 
             <div
-                class="toggle flex items-center"
+                :id="setting.key"
+                class="toggle inline-flex items-center"
                 :class="{ 'on': setting.value }"
                 @click="$emit('update', {
                     key: setting.key,
@@ -34,12 +35,12 @@ export default {
 <style scoped>
 .slider {
     position: relative;
-    margin-right: 1rem;
     width: 4rem;
     height: 2rem;
     background: var(--50);
     transition: 200ms ease-out;
     border-radius: 1rem;
+    overflow: hidden;
     cursor: pointer;
 }
 .slider::before {

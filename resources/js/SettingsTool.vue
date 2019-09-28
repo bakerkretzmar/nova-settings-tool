@@ -14,15 +14,6 @@
 
                 <!-- <div v-for="setting in group.settings"> -->
 
-                   <!--  <toggle-setting
-                        v-if="setting.type == 'toggle'"
-                        :name="setting.name"
-                        :description="setting.description || ''"
-                        :link="setting.link || {}"
-                        :setting="{ key: setting.key, value: settings[setting.key] }"
-                        @toggle="handleToggle"
-                    /> -->
-
                     <!-- The API I *really want*: -->
 
                     <component
@@ -89,7 +80,7 @@ export default {
 
     methods: {
         updateSetting(data) {
-            this.settings[data.key] = data.value
+            this.settings[data.key].value = data.value
         },
 
         handleToggle(key) {

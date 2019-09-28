@@ -28,7 +28,9 @@ class SettingsToolController
                     'label' => $setting['key'],
                     'value' => $values[$setting['key']] ?? null,
                 ], $setting);
-            })->all();
+            })
+            ->keyBy('key')
+            ->all();
 
         return response()->json($settings);
     }
