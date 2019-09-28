@@ -1,5 +1,5 @@
 <template>
-    <div class="flex border-b border-40">
+    <setting-wrapper>
 
         <setting-label>
             {{ __(name) }}
@@ -24,12 +24,13 @@
 
         </div>
 
-    </div>
+    </setting-wrapper>
 </template>
 
 <script>
 import SettingLabel from './Label'
 import SettingInfo from './Info'
+import SettingWrapper from './SettingWrapper'
 
 import CodeMirror from 'codemirror'
 
@@ -52,7 +53,8 @@ export default {
 
     components: {
         SettingLabel,
-        SettingInfo
+        SettingInfo,
+        SettingWrapper
     },
 
     data: () => ({

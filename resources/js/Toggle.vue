@@ -1,5 +1,5 @@
 <template>
-    <div class="flex border-b border-40">
+    <setting-wrapper>
 
         <setting-label>
             {{ __(label) }}
@@ -19,12 +19,13 @@
 
         <setting-info v-if="help" :text="__(help)" class="py-6 w-1/2"/>
 
-    </div>
+    </setting-wrapper>
 </template>
 
 <script>
 import SettingLabel from './Label'
 import SettingInfo from './Info'
+import SettingWrapper from './SettingWrapper'
 
 export default {
     props: {
@@ -38,7 +39,8 @@ export default {
 
     components: {
         SettingLabel,
-        SettingInfo
+        SettingInfo,
+        SettingWrapper
     },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex border-b border-40">
+    <setting-wrapper>
 
         <setting-label>
             {{ __(label) }}
@@ -17,14 +17,17 @@
 
         </div>
 
-    </div>
+    </setting-wrapper>
 </template>
 
 <script>
 import SettingLabel from './Label'
 import SettingInfo from './Info'
+import SettingWrapper from './SettingWrapper'
 
 export default {
+    components: { SettingLabel, SettingInfo, SettingWrapper },
+
     props: {
         label: String,
         setting: Object,
@@ -32,11 +35,6 @@ export default {
             type: String,
             required: false,
         },
-    },
-
-    components: {
-        SettingLabel,
-        SettingInfo
     },
 }
 </script>
