@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
 import TextSetting from '@/TextSetting'
 
-describe('Text Setting', () => {
+describe('Text setting', () => {
 
     it('sets `id` to the setting key', () => {
         const wrapper = shallowMount(TextSetting, {

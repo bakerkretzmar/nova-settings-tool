@@ -64,16 +64,16 @@
 
 <script>
 import CodeSetting from './Code'
-import ToggleSetting from './Toggle'
 import TextSetting from './TextSetting'
 import TextareaSetting from './TextareaSetting'
+import ToggleSetting from './ToggleSetting'
 
 export default {
     components: {
-        ToggleSetting,
+        CodeSetting,
         TextSetting,
         TextareaSetting,
-        CodeSetting,
+        ToggleSetting,
     },
 
     data: () => ({
