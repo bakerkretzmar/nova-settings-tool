@@ -10,7 +10,7 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="SettingsTool Test Suite">
+        <testsuite name="Nova Settings Tool Tests">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

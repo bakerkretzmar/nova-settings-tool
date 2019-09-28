@@ -1,6 +1,6 @@
 let mix = require('laravel-mix')
 
-mix.disableSuccessNotifications()
-
-mix.setPublicPath('dist')
+mix
+    .disableNotifications()
+    .setPublicPath('dist')
     .js('resources/js/tool.js', 'js')
