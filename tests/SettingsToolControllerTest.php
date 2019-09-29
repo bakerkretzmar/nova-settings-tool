@@ -1,79 +1,64 @@
 <?php
 
-namespace Bakerkretzmar\SettingsTool\Tests;
+namespace Bakerkretzmar\NovaSettingsTool\Tests;
 
-use Bakerkretzmar\SettingsTool\Http\Controllers\SettingsToolController;
-
-use Spatie\Valuestore\Valuestore;
+use Illuminate\Support\Facades\Storage;
 
 class SettingsToolControllerTest extends TestCase
 {
-    public function setUp()
+    /** @test */
+    public function can_read_settings()
     {
-        parent::setUp();
+        $response = $this->get('nova-vendor/settings-tool');
 
-        $this->app
-            ->when(SettingsToolController::class)
-            ->needs('$settingsPath')
-            ->give(__DIR__.'/stubs/settings.json');
+        $response->assertSuccessful();
+        $response->assertJsonFragment([
+            'key' => 'test_setting',
+            'value' => 'https://example.com',
+        ]);
     }
 
     /** @test */
-    function it_gets_the_settings()
+    public function can_read_settings_from_custom_path()
     {
-        $this
-            ->get('nova-vendor/settings-tool')
-            ->assertSuccessful()
-            ->assertJson(['test' => 'indeed']);
+        Storage::disk('public')->put(
+            'custom/configurations.json',
+            file_get_contents(__DIR__ . '/stubs/settings.json')
+        );
+
+        config(['nova-settings-tool.path' => base_path() . '/storage/app/public/custom/configurations.json']);
+
+        $response = $this->get('nova-vendor/settings-tool');
+
+        $response->assertSuccessful();
+        $response->assertJsonFragment([
+            'key' => 'test_setting',
+            'value' => 'https://example.com',
+        ]);
     }
 
     /** @test */
-    function it_sets_the_settings()
+    public function can_fill_default_setting_metadata_automatically()
     {
-        $this
-            ->postJson('nova-vendor/settings-tool', [
-                'settings' => [
-                    'test' => 'oh really?',
-                    'fact' => true,
-                ],
-            ])
-            ->assertSuccessful()
-            ->assertJson([
-                'test' => 'oh really?',
-                'fact' => true,
-            ]);
+        $response = $this->get('nova-vendor/settings-tool');
+
+        $response->assertJsonFragment([
+            'key' => 'setting_with_no_metadata',
+            'type' => 'text',
+            'label' => 'Setting_with_no_metadata',
+            'value' => null,
+        ]);
     }
 
     /** @test */
-    public function it_will_start_from_the_ending_of_the_file_when_no_starting_line_number_is_given()
+    public function can_write_settings()
     {
-        // $this
-        //     ->postJson('nova-vendor/spatie/tail-tool')
-        //     ->assertSuccessful()
-        //     ->assertJson([
-        //         'text' => '',
-        //         'lastRetrievedLineNumber' => 10,
-        //     ]);
+        $response = $this->postJson('nova-vendor/settings-tool', [
+            'test_setting' => 'http://google.ca',
+        ]);
 
-        $this->assertTrue(true);
+        $response->assertSuccessful();
+        $this->assertArrayHasKey('test_setting', json_decode(Storage::get('settings.json'), true));
+        $this->assertSame('http://google.ca', json_decode(Storage::get('settings.json'), true)['test_setting']);
     }
-
-    /** @test */
-    public function it_can_start_from_a_specific_line()
-    {
-        $this
-            ->postJson('nova-vendor/spatie/tail-tool', ['afterLineNumber' => 8])
-            ->assertSuccessful()
-            ->assertJson([
-                'text' => 'nine'.PHP_EOL.'ten'.PHP_EOL,
-                'lastRetrievedLineNumber' => 10,
-            ]);
-    }
-
-    // protected function getPackageProviders($app)
-    // {
-    //     return [
-    //         SettingsToolServiceProvider::class,
-    //     ];
-    // }
 }

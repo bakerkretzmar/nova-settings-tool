@@ -1,16 +1,15 @@
 <?php
 
-namespace Bakerkretzmar\SettingsTool\Http\Middleware;
+namespace Bakerkretzmar\NovaSettingsTool\Http\Middleware;
 
-use Bakerkretzmar\SettingsTool\SettingsTool;
+use Bakerkretzmar\NovaSettingsTool\SettingsTool;
 
 class Authorize
 {
-    /**
-     * Handle the incoming request.
-     */
     public function handle($request, $next)
     {
-        return resolve(SettingsTool::class)->authorize($request) ? $next($request) : abort(403);
+        return resolve(SettingsTool::class)->authorize($request)
+            ? $next($request)
+            : abort(403);
     }
 }

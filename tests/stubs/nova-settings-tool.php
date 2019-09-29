@@ -2,47 +2,27 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Settings Path
-    |--------------------------------------------------------------------------
-    |
-    | This is where your settings are stored on disk within your application's
-    | `storage` directory. Note: any subdirectories must already exist.
-    |
-    | Defaults to 'app/settings.json' if not specified here.
-    |
-    */
+    'sidebar-label' => 'Configuration',
 
-    'path' => 'app/settings.json',
+    'settings' => [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Navigation Title
-    |--------------------------------------------------------------------------
-    |
-    | This is the text Nova's navigation sidebar will display for this tool.
-    |
-    | Defaults to 'Settings' if not specified here.
-    |
-    */
+        [
+            'type' => 'text',
+            'key' => 'facebook_url',
+            'label' => 'Facebook',
+            'help' => 'App Twitter page URL. <a href="#">Read more.</a>',
+            'default' => 'jacobbakr',
+        ],
 
-    'navigation' => 'Settings',
+        [
+            'key' => 'test_setting',
+        ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Settings
-    |--------------------------------------------------------------------------
-    |
-    | This is the good stuff :). Each 'panel' will be shown grouped together
-    | under its 'title'. Each 'setting' in a panel will display a row in Nova,
-    | and you can specify the key used to store its value on disk, its display
-    | name in Nova, a description, its type (only boolean or text for now),
-    | and a link for more information.
-    |
-    | Each setting must include at least a key, name, and type.
-    |
-    */
+        [
+            'key' => 'setting_with_no_metadata',
+        ],
+
+    ],
 
     'panels' => [
 
@@ -64,10 +44,10 @@ return [
                 ],
 
                 [
-                    'key' => 'twitter_url',
-                    'name' => 'Twitter',
+                    'key' => 'test_string',
+                    'name' => 'Test String',
                     'type' => 'text',
-                    'description' => 'App Twitter page URL.',
+                    'description' => 'Test string.',
                     'link' => [
                         'text' => 'More.',
                         'url' => '/documentation#twitter_url',
@@ -124,19 +104,6 @@ return [
                     'type' => 'code',
                     'language' => 'javascript',
                     'description' => 'Code to inject into the homepage.',
-                    'link' => [
-                        'text' => 'Documentation',
-                        'url' => '/documentation#new_feature',
-                    ],
-                ],
-
-                [
-                    'key' => 'file',
-                    'name' => 'File',
-                    'type' => 'file',
-                    'disk' => 'local',
-                    'path' => 'settings',
-                    'description' => 'File to upload and save at a specified location.',
                     'link' => [
                         'text' => 'Documentation',
                         'url' => '/documentation#new_feature',

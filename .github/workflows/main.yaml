@@ -1,0 +1,30 @@
+name: CI
+
+on: [push]
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Setup
+        env:
+          NOVA_USERNAME: ${{ secrets.NOVA_USERNAME }}
+          NOVA_PASSWORD: ${{ secrets.NOVA_PASSWORD }}
+        run: |
+          composer config http-basic.nova.laravel.com $NOVA_USERNAME $NOVA_PASSWORD
+          composer install -n --prefer-dist --no-ansi --no-progress --no-suggest --no-scripts
+
+      - name: PHPUnit
+        run: vendor/bin/phpunit --testdox --colors=always
+
+      - name: Jest
+        run: |
+          npm install
+          npm run test
