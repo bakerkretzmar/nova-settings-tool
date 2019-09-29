@@ -35,6 +35,7 @@
 <script>
 import CodeSetting from './CodeSetting'
 import NumberSetting from './NumberSetting'
+import SelectSetting from './SelectSetting'
 import TextSetting from './TextSetting'
 import TextareaSetting from './TextareaSetting'
 import ToggleSetting from './ToggleSetting'
@@ -43,6 +44,7 @@ export default {
     components: {
         CodeSetting,
         NumberSetting,
+        SelectSetting,
         TextSetting,
         TextareaSetting,
         ToggleSetting,
