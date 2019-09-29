@@ -7,10 +7,7 @@ return [
     | Settings Path
     |--------------------------------------------------------------------------
     |
-    | This is where your settings are stored on disk within your application's
-    | `storage` directory. Note: any subdirectories must already exist.
-    |
-    | Defaults to 'app/settings.json' if not specified here.
+    | The JSON file where settings are stored, within the `storage` directory.
     |
     */
 
@@ -18,133 +15,61 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Navigation Title
+    | Sidebar Label
     |--------------------------------------------------------------------------
     |
-    | This is the text Nova's navigation sidebar will display for this tool.
-    |
-    | Defaults to 'Settings' if not specified here.
+    | The text that Nova displays for this tool in the navigation sidebar.
     |
     */
 
-    'navigation' => 'Settings',
+    'sidebar-label' => 'Settings',
 
     /*
     |--------------------------------------------------------------------------
     | Settings
     |--------------------------------------------------------------------------
     |
-    | This is the good stuff :). Each 'panel' will be shown grouped together
-    | under its 'title'. Each 'setting' in a panel will display a row in Nova,
-    | and you can specify the key used to store its value on disk, its display
-    | name in Nova, a description, its type (only boolean or text for now),
-    | and a link for more information.
-    |
-    | Each setting must include at least a key, name, and type.
+    | The good stuff :). Each setting defined here will render a field in the
+    | tool. The only required key is `key`, other available keys include `type`,
+    | `label`, `help`, `placeholder`, `language`, and `panel`.
     |
     */
 
-    'panels' => [
+    'settings' => [
 
         [
-
-            'name' => 'Settings',
-
-            'settings' => [
-
-                [
-                    'key' => 'facebook_url',
-                    'name' => 'Facebook',
-                    'type' => 'text',
-                    'description' => 'App Facebook page URL.',
-                    'link' => [
-                        'text' => 'More.',
-                        'url' => '/documentation#facebook_url',
-                    ],
-                ],
-
-                [
-                    'key' => 'twitter_url',
-                    'name' => 'Twitter',
-                    'type' => 'text',
-                    'description' => 'App Twitter page URL.',
-                    'link' => [
-                        'text' => 'More.',
-                        'url' => '/documentation#twitter_url',
-                    ],
-                ],
-
-            ],
-
+            'key' => 'facebook_url',
+            'name' => 'Facebook Page',
+            'help' => 'Company Facebook page.',
+            'panel' => 'Social',
         ],
 
         [
+            'key' => 'twitter_url',
+            'name' => 'Twitter Profile',
+            'panel' => 'Social',
+        ],
 
-            'name' => 'Features',
+        [
+            'key' => 'feature_42',
+            'name' => 'Feature 42',
+            'type' => 'toggle',
+            'help' => 'Upcoming release. <a href="/docs#feature_42">Read more here.</a>',
+        ],
 
-            'settings' => [
+        [
+            'key' => 'welcome',
+            'name' => 'Welcome Message',
+            'type' => 'textarea',
+            'help' => 'Greeting for new users on their first login.',
+        ],
 
-                [
-                    'key' => 'new_feature',
-                    'name' => 'New Feature',
-                    'type' => 'toggle',
-                    'description' => 'Top secret new app feature.',
-                    'link' => [
-                        'text' => 'Documentation',
-                        'url' => '/documentation#new_feature',
-                    ],
-                ],
-
-                [
-                    'key' => 'enabled_feature',
-                    'name' => 'Enabled Feature',
-                    'type' => 'toggle',
-                    'default' => true,
-                    'description' => 'Feature enabled by default.',
-                    'link' => [
-                        'text' => 'Documentation',
-                        'url' => '/documentation#new_feature',
-                    ],
-                ],
-
-                [
-                    'key' => 'welcome_message',
-                    'name' => 'Welcome Message',
-                    'type' => 'textarea',
-                    'description' => 'Message for new users on their first login.',
-                    'link' => [
-                        'text' => 'Documentation',
-                        'url' => '/documentation#new_feature',
-                    ],
-                ],
-
-                [
-                    'key' => 'snippet',
-                    'name' => 'Code Snippet',
-                    'type' => 'code',
-                    'language' => 'javascript',
-                    'description' => 'Code to inject into the homepage.',
-                    'link' => [
-                        'text' => 'Documentation',
-                        'url' => '/documentation#new_feature',
-                    ],
-                ],
-
-                [
-                    'key' => 'file',
-                    'name' => 'File',
-                    'type' => 'file',
-                    'disk' => 'local',
-                    'path' => 'settings',
-                    'description' => 'File to upload and save at a specified location.',
-                    'link' => [
-                        'text' => 'Documentation',
-                        'url' => '/documentation#new_feature',
-                    ],
-                ],
-
-            ],
-
+        [
+            'key' => 'snippet',
+            'name' => 'Tracking Snippet',
+            'type' => 'code',
+            'language' => 'htmlmixed',
+            'help' => 'Analytics snippet to add to all marketing pages.',
         ],
 
     ],
