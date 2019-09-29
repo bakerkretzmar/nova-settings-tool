@@ -2,5 +2,4 @@
 /vendor
 .phpunit.result.cache
 composer.lock
-notes.md
 package-lock.json

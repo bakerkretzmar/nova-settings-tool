@@ -51,14 +51,24 @@ Each item in the `settings` array is rendered as an input with a label and help 
 
 The settings' actual values are stored as JSON at the location specified in the config file—`app/settings.json` by default.
 
-There are currently four available setting types:
+There are currently six available setting types:
 
 - `text`: Single-line text input
 - `textarea`: Multi-line text input
-- `toggle`: Boolean
-- `code`: [CodeMirror](https://codemirror.net/) editor
+- `toggle`: Boolean switch
+- `code`: [CodeMirror](https://codemirror.net/) text editor
+- `number`: Number input
+- `select`: Single-select dropdown
 
 All strings in this package, and any you pass to it, can easily be translated using [Laravel's built-in localization features](https://laravel.com/docs/localization#using-translation-strings-as-keys).
+
+## Roadmap
+
+The following features are planned or in development:
+
+- `color` setting type
+- `date` setting type
+- `file` setting type
 
 ---
 
