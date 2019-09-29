@@ -4,12 +4,12 @@
         <template slot="setting">
 
             <input
-                type="text"
+                type="number"
                 :id="setting.key"
                 :value="setting.value"
                 @input="$emit('update', {
                     key: setting.key,
-                    value: $event.target.value,
+                    value: Number($event.target.value),
                 })"
                 :placeholder="setting.placeholder"
                 class="w-full form-control form-input form-input-bordered"
