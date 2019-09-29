@@ -3,7 +3,6 @@
 namespace Bakerkretzmar\NovaSettingsTool\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Spatie\Valuestore\Valuestore;
 
 class SettingsToolController
@@ -31,12 +30,12 @@ class SettingsToolController
             ->all();
 
         $settings = $settings->map(function ($setting) use ($values) {
-                return array_merge([
+            return array_merge([
                     'type' => 'text',
                     'label' => ucfirst($setting['key']),
                     'value' => $values[$setting['key']] ?? null,
                 ], $setting);
-            })
+        })
             ->keyBy('key')
             ->all();
 
