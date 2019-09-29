@@ -21,12 +21,12 @@ class SettingsToolControllerTest extends TestCase
     /** @test */
     public function can_read_settings_from_custom_path()
     {
-        Storage::put(
+        Storage::disk('public')->put(
             'custom/configurations.json',
             file_get_contents(__DIR__ . '/stubs/settings.json')
         );
 
-        config(['nova-settings-tool.path' => 'app/custom/configurations.json']);
+        config(['nova-settings-tool.path' => base_path() . '/storage/app/public/custom/configurations.json']);
 
         $response = $this->get('nova-vendor/settings-tool');
 

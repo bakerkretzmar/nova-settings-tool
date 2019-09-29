@@ -7,11 +7,11 @@ return [
     | Settings Path
     |--------------------------------------------------------------------------
     |
-    | The JSON file where settings are stored, within the `storage` directory.
+    | Path to the JSON file where settings are stored.
     |
     */
 
-    'path' => 'app/settings.json',
+    'path' => storage_path('app/settings.json'),
 
     /*
     |--------------------------------------------------------------------------

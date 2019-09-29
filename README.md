@@ -49,7 +49,7 @@ A [default config file with some helpful examples](config/nova-settings-tool.php
 
 Each item in the `settings` array is rendered as an input with a label and help text, similarly to one of Nova's fields. Optionally, settings can be grouped into panels to separate them visually.
 
-The settings' actual values are stored as JSON at the location specified in the config file—`app/settings.json` by default.
+The settings' actual values are stored as JSON at the location specified in the config file—`storage/app/settings.json` by default.
 
 There are currently six available setting types:
 

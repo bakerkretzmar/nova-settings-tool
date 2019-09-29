@@ -13,7 +13,7 @@ class SettingsToolController
     public function __construct()
     {
         $this->store = Valuestore::make(
-            storage_path(config('nova-settings-tool.path', 'app/settings.json'))
+            config('nova-settings-tool.path', storage_path('app/settings.json'))
         );
     }
 
