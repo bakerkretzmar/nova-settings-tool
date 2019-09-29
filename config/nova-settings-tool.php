@@ -38,38 +38,47 @@ return [
     'settings' => [
 
         [
-            'key' => 'facebook_url',
-            'name' => 'Facebook Page',
-            'help' => 'Company Facebook page.',
-            'panel' => 'Social',
-        ],
-
-        [
             'key' => 'twitter_url',
-            'name' => 'Twitter Profile',
+            'label' => 'Twitter Profile',
             'panel' => 'Social',
         ],
 
         [
             'key' => 'feature_42',
-            'name' => 'Feature 42',
+            'label' => 'Feature 42',
             'type' => 'toggle',
-            'help' => 'Upcoming release. <a href="/docs#feature_42">Read more here.</a>',
+            'help' => 'For the upcoming release. <a href="/docs#feature_42">Read more here.</a>',
         ],
 
         [
             'key' => 'welcome',
-            'name' => 'Welcome Message',
+            'label' => 'Welcome Message',
             'type' => 'textarea',
             'help' => 'Greeting for new users on their first login.',
         ],
 
         [
             'key' => 'snippet',
-            'name' => 'Tracking Snippet',
+            'label' => 'Tracking Snippet',
             'type' => 'code',
             'language' => 'htmlmixed',
             'help' => 'Analytics snippet to add to all marketing pages.',
+        ],
+
+        [
+            'key' => 'theme',
+            'label' => 'Default App Theme',
+            'type' => 'select',
+            'options' => [
+                'dark' => 'Dark theme',
+                'light' => 'Light theme',
+            ],
+        ],
+
+        [
+            'key' => 'timeout',
+            'type' => 'Number',
+            'label' => 'Timeout (min.)',
         ],
 
     ],
