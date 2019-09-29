@@ -4,9 +4,7 @@ on: [push]
 
 jobs:
   test:
-
     name: Tests
-
     runs-on: ubuntu-latest
 
     steps:
@@ -32,4 +30,4 @@ jobs:
           npm run prod
 
       - name: Jest
-        run: npm run test --colors
+        run: npm run test

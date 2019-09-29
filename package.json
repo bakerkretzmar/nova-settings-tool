@@ -4,8 +4,7 @@
         "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "watch": "NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "test": "jest -- --verbose",
-        "test-watch": "jest -- --watch --verbose"
+        "test": "jest --verbose"
     },
     "devDependencies": {
         "@vue/test-utils": "^1.0.0-beta.29",
