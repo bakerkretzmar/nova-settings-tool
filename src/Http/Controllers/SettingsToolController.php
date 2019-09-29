@@ -21,8 +21,16 @@ class SettingsToolController
     {
         $values = $this->store->all();
 
-        $settings = collect(config('nova-settings-tool.settings'))
-            ->map(function ($setting) use ($values) {
+        $settings = collect(config('nova-settings-tool.settings'));
+
+        $panels = $settings->where('panel', '!=', null)->pluck('panel')->unique()
+            ->flatMap(function ($panel) use ($settings) {
+                return [$panel => $settings->where('panel', $panel)->pluck('key')->all()];
+            })
+            ->merge(['_default' => $settings->where('panel', null)->pluck('key')->all()])
+            ->all();
+
+        $settings = $settings->map(function ($setting) use ($values) {
                 return array_merge([
                     'type' => 'text',
                     'label' => ucfirst($setting['key']),
@@ -32,7 +40,7 @@ class SettingsToolController
             ->keyBy('key')
             ->all();
 
-        return response()->json($settings);
+        return response()->json(compact('settings', 'panels'));
     }
 
     public function write(Request $request)

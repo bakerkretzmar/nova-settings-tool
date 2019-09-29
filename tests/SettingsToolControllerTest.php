@@ -45,7 +45,7 @@ class SettingsToolControllerTest extends TestCase
         $response->assertJsonFragment([
             'key' => 'setting_with_no_metadata',
             'type' => 'text',
-            'label' => 'setting_with_no_metadata',
+            'label' => 'Setting_with_no_metadata',
             'value' => null,
         ]);
     }

@@ -1,38 +1,33 @@
 <template>
     <div>
 
-            <!-- <heading class="mb-6">
-                {{ __(group.name) }}
-            </heading> -->
+        <template v-for="(keys, panel) in panels">
+
             <heading class="mb-6">
-                Settings
+                {{ __(panelName(panel)) }}
             </heading>
 
             <card class="relative overflow-hidden mb-8">
 
-                <!-- <div v-for="setting in group.settings"> -->
-
-                    <!-- The API I *really want*: -->
-
-                    <component
-                        v-for="setting in settings"
-                        :key="setting.key"
-                        :is="`${setting.type}-setting`"
-                        :setting="setting"
-                        @update="updateSetting"
-                    />
-
-                <!-- </div> -->
+                <component
+                    v-for="setting in keys"
+                    :key="settings[setting].key"
+                    :is="`${settings[setting].type}-setting`"
+                    :setting="settings[setting]"
+                    @update="updateSetting"
+                />
 
             </card>
 
-            <div class="flex items-center">
+        </template>
 
-                <progress-button class="ml-auto" @click.native="saveSettings" :processing="saving">
-                    {{ __('Save') }}
-                </progress-button>
+        <div class="flex items-center">
 
-            </div>
+            <progress-button class="ml-auto" @click.native="saveSettings" :processing="saving">
+                {{ __('Save') }}
+            </progress-button>
+
+        </div>
 
     </div>
 </template>
@@ -54,11 +49,15 @@ export default {
     data: () => ({
         saving: false,
         settings: {},
+        panels: {},
     }),
 
     mounted() {
         Nova.request().get('/nova-vendor/settings-tool')
-            .then(response => this.settings = response.data)
+            .then(response => {
+                this.settings = response.data.settings
+                this.panels = response.data.panels
+            })
     },
 
     methods: {
@@ -80,7 +79,17 @@ export default {
                     this.saving = false
                     console.log(error.response)
                 })
-        }
-    }
+        },
+
+        panelName(value) {
+            if (value === '_default') {
+                return Object.keys(this.panels).length > 1
+                    ? 'Other'
+                    : 'Settings'
+            }
+
+            return value
+        },
+    },
 }
 </script>
