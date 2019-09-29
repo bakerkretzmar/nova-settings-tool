@@ -3,6 +3,7 @@ Laravel Nova tool to manage app settings
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/bakerkretzmar/nova-settings-tool.svg?style=flat)](https://packagist.org/packages/bakerkretzmar/nova-settings-tool)
 [![Total Downloads](https://img.shields.io/packagist/dt/bakerkretzmar/nova-settings-tool.svg?style=flat)](https://packagist.org/packages/bakerkretzmar/nova-settings-tool)
+[![CI](https://github.com/bakerkretzmar/nova-settings-tool/workflows/CI/badge.svg)](https://github.com/bakerkretzmar/nova-settings-tool/actions)
 [![StyleCI](https://github.styleci.io/repos/165178010/shield?branch=master&style=flat)](https://github.styleci.io/repos/165178010)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://opensource.org/licenses/MIT)
 
