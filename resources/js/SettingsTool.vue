@@ -39,6 +39,7 @@ import SelectSetting from './SelectSetting'
 import TextSetting from './TextSetting'
 import TextareaSetting from './TextareaSetting'
 import ToggleSetting from './ToggleSetting'
+import EditorSetting from './EditorSetting'
 
 export default {
     components: {
@@ -48,6 +49,7 @@ export default {
         TextSetting,
         TextareaSetting,
         ToggleSetting,
+        EditorSetting
     },
 
     data: () => ({

@@ -60,6 +60,7 @@ There are currently six available setting types:
 - `code`: [CodeMirror](https://codemirror.net/) text editor
 - `number`: Number input
 - `select`: Single-select dropdown
+- `editor`: [Quill](https://quilljs.com/) WYSIWYG text editor
 
 All strings in this package, and any you pass to it, can easily be translated using [Laravel’s built-in localization features](https://laravel.com/docs/localization#using-translation-strings-as-keys).
 
