@@ -2,7 +2,7 @@
     <default-setting :setting="setting" :errors="errors || []">
 
         <template slot="setting">
-            <div class="form-input px-0">
+            <div class="form-input form-input-no-focus px-0">
                 <div :id="setting.key" v-html="this.contents"></div>
             </div>
         </template>
@@ -80,11 +80,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     @import '~quill/dist/quill.core.css';
     @import '~quill/dist/quill.snow.css';
 
-    .form-input {
+    .form-input-no-focus {
         &:focus, &:active {
             box-shadow: none;
         }
@@ -98,5 +98,9 @@ export default {
     .ql-container {
         height:300px;
         border-radius: 0 0 .5rem .5rem ;
+    }
+
+    .ql-editor p {
+        margin-bottom: 1rem;
     }
 </style>
