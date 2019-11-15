@@ -2,6 +2,10 @@
 
 All notable changes to `nova-settings-tool` will be documented in this file.
 
+## 1.0.1 – 2019-11-15
+
+- Fix an issue where the "Other" panel heading displays even when empty
+
 ## 1.0 – 2019-09-29
 
 This is a major release. Upgrading will only take a few minutes and mostly just involves restructuring the config file, but this release is a major departure from previous versions of the package in a few ways, and therefore it **is not backwards compatible.**

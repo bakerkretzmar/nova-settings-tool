@@ -26,7 +26,9 @@ class SettingsToolController
             ->flatMap(function ($panel) use ($settings) {
                 return [$panel => $settings->where('panel', $panel)->pluck('key')->all()];
             })
-            ->merge(['_default' => $settings->where('panel', null)->pluck('key')->all()])
+            ->when($settings->where('panel', null)->isNotEmpty(), function ($collection) use ($settings) {
+                return $collection->merge(['_default' => $settings->where('panel', null)->pluck('key')->all()]);
+            })
             ->all();
 
         $settings = $settings->map(function ($setting) use ($values) {
