@@ -2,9 +2,9 @@
 
 namespace Bakerkretzmar\NovaSettingsTool;
 
+use Bakerkretzmar\NovaSettingsTool\Http\Middleware\Authorize;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Bakerkretzmar\NovaSettingsTool\Http\Middleware\Authorize;
 
 class SettingsToolServiceProvider extends ServiceProvider
 {
