@@ -1,14 +1,13 @@
 <?php
-
 namespace Bakerkretzmar\NovaSettingsTool\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Spatie\Valuestore\Valuestore;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use Illuminate\Support\Facades\Storage;
-use App\Nova\Client as ClientResource;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Client;
+use App\Nova\Client as ClientResource;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use Spatie\Valuestore\Valuestore;
 
 class SettingsToolController
 {
@@ -21,6 +20,14 @@ class SettingsToolController
         );
     }
 
+    /**
+     * Extractt the panels and fields and give them there values.
+     *
+     * @param  Laravel\Nova\Http\Requests\NovaRequest $request
+     * @param  array                                  $values  The values from the store
+     *
+     * @return response
+     */
     private function get_setting_panels(NovaRequest $request, $values = [])
     {
         $panels = collect(config('nova-settings-tool.panels'));
@@ -46,9 +53,12 @@ class SettingsToolController
                 }
 
                 return $field;
-                }, array_filter($panel['fields']($request), function($field){
+            },array_filter(
+                is_array($panel['fields']) ? $panel['fields'] : $panel['fields']($request),
+                function($field){
                     return true;
-                }));
+                }
+            ));
 
             return $panel;
         });

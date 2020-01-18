@@ -1,4 +1,6 @@
 <?php
+use Laravel\Nova\Http\Requests\NovaRequest;
+
 use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Code;
@@ -82,7 +84,7 @@ return [
     'panels' => [
         [
             'name' => 'Social',
-            'fields' => function(){
+            'fields' => function (NovaRequest $request) {
                 return [
                     Text::make('Facebook Profile', 'facebook_url')
                         ->rules('required', 'url'),
@@ -95,7 +97,7 @@ return [
         ],
         [
             'name' => 'Available Nova Fields',
-            'fields' => function(){
+            'fields' => function (NovaRequest $request) {
                 return [
                     Avatar::make('Avatar', 'avatar'),
                     Boolean::make('Active', 'active'),
@@ -145,24 +147,22 @@ return [
         ],
         [
             'name' => 'Other',
-            'fields' => function(){
-                return [
-                    Boolean::make('Feature 42', 'feature_42')
-                        ->help('For the upcoming release. <a href="/docs#feature_42">Read more here.</a>'),
-                    Textarea::make('Welcome Message', 'welcome')
-                        ->help('Greeting for new users on their first login.'),
-                    Code::make('Tracking Snippet', 'snippet')
-                        ->language('html')
-                        ->help('Analytics snippet to add to all marketing pages.'),
-                    Select::make('Default App Theme', 'theme')
-                        ->options([
-                            'dark' => 'Dark theme',
-                            'light' => 'Light theme'
-                        ]),
-                    Number::make('Timeout (min.)', 'timeout'),
-                    Trix::make('Longer presentation', 'long_text'),
-                ];
-            },
+            'fields' => [
+                Boolean::make('Feature 42', 'feature_42')
+                    ->help('For the upcoming release. <a href="/docs#feature_42">Read more here.</a>'),
+                Textarea::make('Welcome Message', 'welcome')
+                    ->help('Greeting for new users on their first login.'),
+                Code::make('Tracking Snippet', 'snippet')
+                    ->language('html')
+                    ->help('Analytics snippet to add to all marketing pages.'),
+                Select::make('Default App Theme', 'theme')
+                    ->options([
+                        'dark' => 'Dark theme',
+                        'light' => 'Light theme'
+                    ]),
+                Number::make('Timeout (min.)', 'timeout'),
+                Trix::make('Longer presentation', 'long_text'),
+            ],
         ]
     ],
 ];
