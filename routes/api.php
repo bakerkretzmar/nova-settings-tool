@@ -2,5 +2,5 @@
 
 use Bakerkretzmar\NovaSettingsTool\Http\Controllers\SettingsToolController;
 
-Route::get('/', [SettingsToolController::class, 'read']);
+Route::get('/fields', [SettingsToolController::class, 'fields']);
 Route::post('/', [SettingsToolController::class, 'write']);

@@ -4,6 +4,9 @@ namespace Bakerkretzmar\NovaSettingsTool\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Valuestore\Valuestore;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use App\Nova\Client as ClientResource;
+use App\Models\Client;
 
 class SettingsToolController
 {
@@ -16,32 +19,23 @@ class SettingsToolController
         );
     }
 
-    public function read()
+    public function fields(NovaRequest $request)
     {
         $values = $this->store->all();
+        $panels = collect(config('nova-settings-tool.panels'));
 
-        $settings = collect(config('nova-settings-tool.settings'));
-
-        $panels = $settings->where('panel', '!=', null)->pluck('panel')->unique()
-            ->flatMap(function ($panel) use ($settings) {
-                return [$panel => $settings->where('panel', $panel)->pluck('key')->all()];
-            })
-            ->when($settings->where('panel', null)->isNotEmpty(), function ($collection) use ($settings) {
-                return $collection->merge(['_default' => $settings->where('panel', null)->pluck('key')->all()]);
-            })
-            ->all();
-
-        $settings = $settings->map(function ($setting) use ($values) {
-            return array_merge([
-                    'type' => 'text',
-                    'label' => ucfirst($setting['key']),
-                    'value' => $values[$setting['key']] ?? null,
-                ], $setting);
-        })
-            ->keyBy('key')
-            ->all();
-
-        return response()->json(compact('settings', 'panels'));
+        return response()->json(
+            [
+                'data' => [
+                    'panels' => $panels,
+                    'values' => $values,
+                    'settings' => [
+                        'visualized' => config('nova-settings-tool.panel-visualized', 'visualized'),
+                        'remember_active' => config('nova-settings-tool.accordion-active-remember', true)
+                    ]
+                ],
+            ]
+        );
     }
 
     public function write(Request $request)

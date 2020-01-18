@@ -1,0 +1,140 @@
+<template>
+    <div class="form-inner accordion-form">
+        <div class="flex align-stretch" v-if="activePanel">
+            <div class="accordion-form__sidebar card mr-4">
+                <ul class="accordion-form__sidebar__list">
+                    <li
+                        v-for="panel in panels"
+                        :key="panel.name"
+                        :class="{active: panel.name === activePanel.name}"
+                        @click="setActivePanel(panel)"
+                    >{{ panel.name }}</li>
+                </ul>
+                <div class="flex justify-end mt-4 mr-4">
+                    <progress-button type="submit">{{ __('Save') }}</progress-button>
+                </div>
+            </div>
+            <div class="accordion-form__content">
+                <div
+                    class="accordion-form__content__item"
+                    v-for="panel in panels"
+                    :key="panel.name"
+                    :class="{active: panel.name === activePanel.name}"
+                >
+                    <transition name="fade">
+                        <form-panel
+                            v-show="panel.name === activePanel.name"
+                            @update-last-retrieved-at-timestamp="$emit('update-last-retrieved-at-timestamp', $event)"
+                            :panel="panel"
+                            :name="panel.name"
+                            :fields="panel.fields"
+                            mode="form"
+                        />
+                    </transition>
+                </div>
+                <div class="flex justify-end mt-4">
+                    <progress-button type="submit">{{ __('Save') }}</progress-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "SettingsToolAccordion",
+
+    props: {
+        panels: Array,
+        remember_active: Boolean
+    },
+
+    data: () => ({
+        activePanel: null
+    }),
+
+    mounted() {
+        if (this.remember_active) {
+            const hasActivePanel = sessionStorage.getItem(
+                "settings-tool-accordion-active-panel"
+            );
+            if (hasActivePanel) {
+                try {
+                    this.activePanel = JSON.parse(hasActivePanel);
+                } catch (e) {
+                    this.activePanel = null;
+                }
+            }
+        }
+
+        if (!this.activePanel) {
+            this.activePanel = this.panels[0];
+        }
+    },
+
+    methods: {
+        setActivePanel(panel) {
+            this.activePanel = panel;
+
+            if (this.remember_active) {
+                sessionStorage.setItem(
+                    "settings-tool-accordion-active-panel",
+                    JSON.stringify(panel)
+                );
+            }
+        }
+    }
+};
+</script>
+
+<style lang="scss" scoped>
+.accordion-form__content {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+.accordion-form__sidebar {
+    min-width: 250px;
+    min-height: 50vh;
+
+    @media (max-width: 767px) {
+        min-width: 0px;
+        min-height: 0px;
+    }
+}
+.accordion-form__sidebar__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.accordion-form__sidebar__list li {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.3;
+    padding: 10px 30px;
+    margin: 0;
+    border-bottom: 1px solid #cccccc;
+
+    &:hover {
+        background-color: var(--sidebar-icon);
+    }
+}
+.accordion-form__sidebar__list li.active {
+    background-color: var(--logo);
+    color: var(--white);
+}
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.fade-enter-active {
+    transition: all 0.3s ease;
+}
+.fade-leave-active {
+    transition: none;
+}
+.fade-enter, .fade-leave-to
+/* .fade-leave-active below version 2.1.8 */ {
+    transform: translateX(10px);
+    opacity: 0;
+}
+</style>

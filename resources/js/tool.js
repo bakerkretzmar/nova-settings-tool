@@ -6,5 +6,4 @@ Nova.booting((Vue, router, store) => {
             component: require("./SettingsTool")
         }
     ]);
-    console.log("hejs hejsa");
 });

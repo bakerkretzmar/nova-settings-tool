@@ -1,99 +1,132 @@
 <template>
     <div>
-
-        <template v-for="(keys, panel) in panels">
-
-            <heading class="mb-6">
-                {{ __(panelName(panel)) }}
-            </heading>
-
-            <card class="relative overflow-hidden mb-8">
-
-                <component
-                    v-for="setting in keys"
-                    :key="settings[setting].key"
-                    :is="`${settings[setting].type}-setting`"
-                    :setting="settings[setting]"
-                    @update="updateSetting"
-                />
-
-            </card>
-
-        </template>
-
-        <div class="flex items-center">
-
-            <progress-button class="ml-auto" @click.native="saveSettings" :processing="saving">
-                {{ __('Save') }}
-            </progress-button>
-
-        </div>
-
+        <form v-if="loaded" @submit.prevent="handleSubmit" autocomplete="off" ref="form">
+            <SettingsToolDefault
+                v-if="visualized === 'stacked'"
+                v-bind="params"
+                :panels="panels"
+                :saving="saving"
+                @update-last-retrieved-at-timestamp="updateLastRetrievedAtTimestamp"
+            />
+            <SettingsToolAccordion
+                v-if="visualized === 'accordion'"
+                v-bind="params"
+                :panels="panels"
+                :saving="saving"
+                @update-last-retrieved-at-timestamp="updateLastRetrievedAtTimestamp"
+            />
+        </form>
     </div>
 </template>
 
 <script>
-import CodeSetting from './CodeSetting'
-import NumberSetting from './NumberSetting'
-import SelectSetting from './SelectSetting'
-import TextSetting from './TextSetting'
-import TextareaSetting from './TextareaSetting'
-import ToggleSetting from './ToggleSetting'
+import SettingsToolDefault from "./SettingsToolDefault";
+import SettingsToolAccordion from "./SettingsToolAccordion";
 
 export default {
     components: {
-        CodeSetting,
-        NumberSetting,
-        SelectSetting,
-        TextSetting,
-        TextareaSetting,
-        ToggleSetting,
+        SettingsToolDefault,
+        SettingsToolAccordion
     },
-
     data: () => ({
         saving: false,
-        settings: {},
-        panels: {},
+        loaded: false,
+        params: {},
+        visualized: "stacked",
+        panels: []
     }),
 
     mounted() {
-        Nova.request().get('/nova-vendor/settings-tool')
-            .then(response => {
-                this.settings = response.data.settings
-                this.panels = response.data.panels
+        Nova.request()
+            .get("/nova-vendor/settings-tool/fields", {
+                params: {
+                    editing: true,
+                    editMode: "create"
+                }
             })
+            .then(response => {
+                const { data: { data = {} } = {} } = response;
+                console.log("object", data);
+                const values = data.values;
+                this.loaded = true;
+                this.params = data.settings;
+                this.visualized = data.settings.visualized;
+                this.panels = data.panels.map(panel => {
+                    return {
+                        ...panel,
+                        fields: panel.fields.map(field => {
+                            if (values[field.attribute]) {
+                                return {
+                                    ...field,
+                                    value: values[field.attribute]
+                                };
+                            }
+
+                            return field;
+                        })
+                    };
+                });
+            });
+    },
+
+    computed: {
+        /**
+         * Create the form data for creating the resource.
+         */
+        updateResourceFormData() {
+            return _.tap(new FormData(), formData => {
+                _(this.panels).each(panel => {
+                    _(panel.fields).each(field => {
+                        field.fill(formData);
+                    });
+                });
+
+                formData.append("_method", "POST");
+                formData.append("_retrieved_at", this.lastRetrievedAt);
+            });
+        }
     },
 
     methods: {
-        updateSetting(data) {
-            this.settings[data.key].value = data.value
+        updateLastRetrievedAtTimestamp() {
+            this.lastRetrievedAt = Math.floor(new Date().getTime() / 1000);
         },
+        handleSubmit(e) {
+            if (this.$refs.form.reportValidity()) {
+                this.saving = true;
+                Nova.request()
+                    .post(
+                        "/nova-vendor/settings-tool",
+                        this.updateResourceFormData
+                    )
+                    .then(response => {
+                        this.saving = false;
+                        this.$toasted.show(this.__("Settings saved!"), {
+                            type: "success"
+                        });
+                    })
+                    .catch(error => {
+                        this.saving = false;
+                        console.log(error.response);
 
-        saveSettings() {
-            this.saving = true
+                        if (error.response.status == 422) {
+                            Nova.error(
+                                this.__(
+                                    "There was a problem submitting the form."
+                                )
+                            );
+                        }
 
-            let settings = _.mapValues(this.settings, 'value')
-
-            Nova.request().post('/nova-vendor/settings-tool', settings)
-                .then(response => {
-                    this.saving = false
-                    this.$toasted.show(this.__('Settings saved!'), { type: 'success' })
-                })
-                .catch(error => {
-                    this.saving = false
-                    console.log(error.response)
-                })
-        },
-
-        panelName(value) {
-            if (value === '_default') {
-                return Object.keys(this.panels).length > 1
-                    ? 'Other'
-                    : 'Settings'
+                        if (error.response.status == 409) {
+                            Nova.error(
+                                this.__(
+                                    "Another user has updated this resource since this page was loaded. Please refresh the page and try again."
+                                )
+                            );
+                        }
+                    });
             }
-
-            return value
-        },
-    },
-}
+        }
+    }
+};
 </script>
