@@ -54,7 +54,12 @@ Each item in the `panels` array is a panel which contains Nova’s fields. Panel
 
 The settings’ actual values are stored as JSON at the location specified in the config file—`storage/app/settings.json` by default.
 
-You can use all the Nova fields which isn't a relationship field.
+You can use all the Nova fields which isn't a relationship field **except**:
+
+- Badge - Seems like it needs a relationship to a resource.
+- Boolean Group - Seems like it needs a relationship to a resource.
+- Gravatar - Needs a relationship with a resource.
+- ID - Needs a relationship with a resource.
 
 All strings in this package, and any you pass to it, can easily be translated using [Laravel’s built-in localization features](https://laravel.com/docs/localization#using-translation-strings-as-keys).
 
