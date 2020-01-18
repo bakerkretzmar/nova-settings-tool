@@ -16,7 +16,7 @@ Store and edit simple app-wide settings right in Nova. Settings are stored as JS
 Install the package via Composer in any Laravel app using [Nova](https://nova.laravel.com):
 
 ```shell
-composer require andreasgj/nova-settings-tool
+composer require bakerkretzmar/nova-settings-tool
 ```
 
 Publish the default configuration file to `config/nova-settings-tool.php`:
