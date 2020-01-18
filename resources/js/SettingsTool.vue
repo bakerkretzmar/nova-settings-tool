@@ -58,7 +58,9 @@ export default {
             return _.tap(new FormData(), formData => {
                 _(this.panels).each(panel => {
                     _(panel.fields).each(field => {
-                        field.fill(formData);
+                        if (field && typeof field.fill == "function") {
+                            field.fill(formData);
+                        }
                     });
                 });
 

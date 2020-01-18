@@ -8,14 +8,14 @@
                         :key="panel.name"
                         :class="{ active: panel.name === activePanel.name }"
                         @click="setActivePanel(panel)"
-                    >
-                        {{ panel.name }}
-                    </li>
+                    >{{ panel.name }}</li>
                 </ul>
                 <div class="flex justify-end mt-4 mr-4">
-                    <progress-button type="submit">{{
+                    <progress-button type="submit">
+                        {{
                         __("Save")
-                    }}</progress-button>
+                        }}
+                    </progress-button>
                 </div>
             </div>
             <div class="accordion-form__content">
@@ -26,31 +26,38 @@
                     :class="{ active: panel.name === activePanel.name }"
                 >
                     <transition name="fade">
-                        <form-panel
+                        <div
+                            class="accordion-form__content__item__inner"
                             v-show="panel.name === activePanel.name"
                             v-if="!needsToBeReloaded(panel.fields)"
-                            @update-last-retrieved-at-timestamp="
-                                $emit(
-                                    'update-last-retrieved-at-timestamp',
-                                    $event
-                                )
-                            "
-                            :panel="panel"
-                            :name="panel.name"
-                            :fields="panel.fields"
-                            :resourceName="'Setting'"
-                            :resourceId="0"
-                            :viaResource="''"
-                            :viaResourceId="''"
-                            :viaRelationship="''"
-                            mode="form"
-                        />
+                        >
+                            <form-panel
+                                @update-last-retrieved-at-timestamp="
+                                    $emit(
+                                        'update-last-retrieved-at-timestamp',
+                                        $event
+                                    )
+                                "
+                                :panel="panel"
+                                :name="panel.name"
+                                :fields="filterOutDetailFields(panel.fields)"
+                                :resourceName="'Setting'"
+                                :resourceId="0"
+                                :viaResource="''"
+                                :viaResourceId="''"
+                                :viaRelationship="''"
+                                mode="form"
+                            />
+                            <DetailFieldsArea :panel="panel" />
+                        </div>
                     </transition>
                 </div>
                 <div class="flex justify-end mt-4">
-                    <progress-button type="submit">{{
+                    <progress-button type="submit">
+                        {{
                         __("Save")
-                    }}</progress-button>
+                        }}
+                    </progress-button>
                 </div>
             </div>
         </div>
@@ -58,9 +65,12 @@
 </template>
 
 <script>
+import settingsViewMixins, { DetailFieldsArea } from "./settingsViewMixins";
+
 export default {
     name: "SettingsToolAccordion",
-
+    mixins: [settingsViewMixins],
+    components: { DetailFieldsArea },
     props: {
         panels: Array,
         remember_active: Boolean
@@ -178,11 +188,5 @@ export default {
 /* .fade-leave-active below version 2.1.8 */ {
     transform: translateX(10px);
     opacity: 0;
-}
-</style>
-
-<style lang="scss">
-.CodeMirror-line {
-    padding-left: 35px !important;
 }
 </style>
