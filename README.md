@@ -16,7 +16,7 @@ Store and edit simple app-wide settings right in Nova. Settings are stored as JS
 Install the package via Composer in any Laravel app using [Nova](https://nova.laravel.com):
 
 ```shell
-composer require bakerkretzmar/nova-settings-tool
+composer require andreasgj/nova-settings-tool
 ```
 
 Publish the default configuration file to `config/nova-settings-tool.php`:
@@ -48,29 +48,20 @@ Settings are declared in a `nova-settings-tool.php` config file. This file speci
 
 A [default config file with some helpful examples](config/nova-settings-tool.php) is included as a starting point:
 
-Each item in the `settings` array is rendered as an input with a label and help text, similar to one of Nova’s fields. Settings can also be grouped into panels, to separate them visually.
+Each item in the `panels` array is a panel which contains Nova’s fields. Panels can also shown as a sidebar instead, so if you have a lot of settings, then you don't need to scroll through it all.
+
+![Settings Tool in accordion mode screenshot](settings-tool-accordion.png)
 
 The settings’ actual values are stored as JSON at the location specified in the config file—`storage/app/settings.json` by default.
 
-There are currently six available setting types:
-
-- `text`: Single-line text input
-- `textarea`: Multi-line text input
-- `toggle`: Boolean switch
-- `code`: [CodeMirror](https://codemirror.net/) text editor
-- `number`: Number input
-- `select`: Single-select dropdown
+You can use all the Nova fields which isn't a relationship field.
 
 All strings in this package, and any you pass to it, can easily be translated using [Laravel’s built-in localization features](https://laravel.com/docs/localization#using-translation-strings-as-keys).
 
 ## Roadmap
 
 The following features are planned or in development:
-
-- `color` setting type
-- `date` setting type
-- `file` setting type
-- setting validation
+- ?
 
 ---
 

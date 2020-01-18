@@ -6,12 +6,16 @@
                     <li
                         v-for="panel in panels"
                         :key="panel.name"
-                        :class="{active: panel.name === activePanel.name}"
+                        :class="{ active: panel.name === activePanel.name }"
                         @click="setActivePanel(panel)"
-                    >{{ panel.name }}</li>
+                    >
+                        {{ panel.name }}
+                    </li>
                 </ul>
                 <div class="flex justify-end mt-4 mr-4">
-                    <progress-button type="submit">{{ __('Save') }}</progress-button>
+                    <progress-button type="submit">{{
+                        __("Save")
+                    }}</progress-button>
                 </div>
             </div>
             <div class="accordion-form__content">
@@ -19,21 +23,34 @@
                     class="accordion-form__content__item"
                     v-for="panel in panels"
                     :key="panel.name"
-                    :class="{active: panel.name === activePanel.name}"
+                    :class="{ active: panel.name === activePanel.name }"
                 >
                     <transition name="fade">
                         <form-panel
                             v-show="panel.name === activePanel.name"
-                            @update-last-retrieved-at-timestamp="$emit('update-last-retrieved-at-timestamp', $event)"
+                            v-if="!needsToBeReloaded(panel.fields)"
+                            @update-last-retrieved-at-timestamp="
+                                $emit(
+                                    'update-last-retrieved-at-timestamp',
+                                    $event
+                                )
+                            "
                             :panel="panel"
                             :name="panel.name"
                             :fields="panel.fields"
+                            :resourceName="'Setting'"
+                            :resourceId="0"
+                            :viaResource="''"
+                            :viaResourceId="''"
+                            :viaRelationship="''"
                             mode="form"
                         />
                     </transition>
                 </div>
                 <div class="flex justify-end mt-4">
-                    <progress-button type="submit">{{ __('Save') }}</progress-button>
+                    <progress-button type="submit">{{
+                        __("Save")
+                    }}</progress-button>
                 </div>
             </div>
         </div>
@@ -50,7 +67,8 @@ export default {
     },
 
     data: () => ({
-        activePanel: null
+        activePanel: null,
+        reload: false
     }),
 
     mounted() {
@@ -73,8 +91,27 @@ export default {
     },
 
     methods: {
+        needsToBeReloaded(fields = []) {
+            if (this.reload) {
+                const filterOut = ["code-field"];
+
+                return (
+                    fields.filter(field => {
+                        return filterOut.indexOf(field.component) >= 0;
+                    }).length > 0
+                );
+            }
+
+            return false;
+        },
+
         setActivePanel(panel) {
+            this.$emit("panelWillChanged", panel, this.activePanel);
+
             this.activePanel = panel;
+
+            // Code Field needs to be reloaded before it will render.
+            this.reload = true;
 
             if (this.remember_active) {
                 sessionStorage.setItem(
@@ -82,6 +119,11 @@ export default {
                     JSON.stringify(panel)
                 );
             }
+
+            // Waiting for next tick because code field has to reload.
+            this.$nextTick(() => {
+                this.reload = false;
+            });
         }
     }
 };
@@ -136,5 +178,11 @@ export default {
 /* .fade-leave-active below version 2.1.8 */ {
     transform: translateX(10px);
     opacity: 0;
+}
+</style>
+
+<style lang="scss">
+.CodeMirror-line {
+    padding-left: 35px !important;
 }
 </style>

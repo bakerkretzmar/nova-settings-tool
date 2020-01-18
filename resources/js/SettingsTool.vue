@@ -1,19 +1,29 @@
 <template>
     <div>
-        <form v-if="loaded" @submit.prevent="handleSubmit" autocomplete="off" ref="form">
+        <form
+            v-if="loaded"
+            @submit.prevent="handleSubmit"
+            autocomplete="off"
+            ref="form"
+        >
             <SettingsToolDefault
                 v-if="visualized === 'stacked'"
                 v-bind="params"
                 :panels="panels"
                 :saving="saving"
-                @update-last-retrieved-at-timestamp="updateLastRetrievedAtTimestamp"
+                @update-last-retrieved-at-timestamp="
+                    updateLastRetrievedAtTimestamp
+                "
             />
             <SettingsToolAccordion
                 v-if="visualized === 'accordion'"
                 v-bind="params"
                 :panels="panels"
                 :saving="saving"
-                @update-last-retrieved-at-timestamp="updateLastRetrievedAtTimestamp"
+                @panelWillChanged="handlePanelWillChanged"
+                @update-last-retrieved-at-timestamp="
+                    updateLastRetrievedAtTimestamp
+                "
             />
         </form>
     </div>
@@ -37,36 +47,7 @@ export default {
     }),
 
     mounted() {
-        Nova.request()
-            .get("/nova-vendor/settings-tool/fields", {
-                params: {
-                    editing: true,
-                    editMode: "create"
-                }
-            })
-            .then(response => {
-                const { data: { data = {} } = {} } = response;
-                console.log("object", data);
-                const values = data.values;
-                this.loaded = true;
-                this.params = data.settings;
-                this.visualized = data.settings.visualized;
-                this.panels = data.panels.map(panel => {
-                    return {
-                        ...panel,
-                        fields: panel.fields.map(field => {
-                            if (values[field.attribute]) {
-                                return {
-                                    ...field,
-                                    value: values[field.attribute]
-                                };
-                            }
-
-                            return field;
-                        })
-                    };
-                });
-            });
+        this.getFields();
     },
 
     computed: {
@@ -88,6 +69,57 @@ export default {
     },
 
     methods: {
+        /**
+         * Load all setting fields with configs.
+         */
+        getFields() {
+            this.loaded = false;
+
+            return Nova.request()
+                .get("/nova-vendor/settings-tool/fields", {
+                    params: {
+                        editing: true,
+                        editMode: "create"
+                    }
+                })
+                .then(response => {
+                    const { data: { data = {} } = {} } = response;
+                    const values = data.values;
+                    this.loaded = true;
+                    this.params = data.settings;
+                    this.visualized = data.settings.visualized;
+                    this.panels = data.panels.map(panel => {
+                        return {
+                            ...panel,
+                            component: "panel",
+                            showToolbar: true,
+                            limit: null
+                        };
+                    });
+                });
+        },
+
+        handlePanelWillChanged(toPanel, fromPanel) {
+            const formData = this.updateResourceFormData;
+
+            if (fromPanel && fromPanel.fields.length > 0) {
+                this.panels = this.panels.map(panel => {
+                    if (panel.name === fromPanel.name) {
+                        return {
+                            ...panel,
+                            fields: panel.fields.map(field => {
+                                return {
+                                    ...field,
+                                    value: formData.get(field.attribute)
+                                };
+                            })
+                        };
+                    }
+                    return panel;
+                });
+            }
+        },
+
         updateLastRetrievedAtTimestamp() {
             this.lastRetrievedAt = Math.floor(new Date().getTime() / 1000);
         },
@@ -104,6 +136,8 @@ export default {
                         this.$toasted.show(this.__("Settings saved!"), {
                             type: "success"
                         });
+
+                        this.getFields();
                     })
                     .catch(error => {
                         this.saving = false;
