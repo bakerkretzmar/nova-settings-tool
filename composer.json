@@ -32,6 +32,9 @@
         "phpunit/phpunit": "^8.3"
     },
     "autoload": {
+        "files": [
+            "helpers/SettingsHelpers.php"
+        ],
         "psr-4": {
             "Bakerkretzmar\\NovaSettingsTool\\": "src/"
         }
