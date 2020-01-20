@@ -63,6 +63,37 @@ You can use all the Nova fields which isn't a relationship field **except**:
 
 All strings in this package, and any you pass to it, can easily be translated using [Laravel’s built-in localization features](https://laravel.com/docs/localization#using-translation-strings-as-keys).
 
+## Get the stored configs?
+
+We have now added a simple way to get the configs you need. Here is the following global functions you can use:
+
+```
+/**
+ * This function will return key value of the configs specified in the $keys array.
+ */
+function get_store_configs(array $keys = []): Object
+
+/**
+ * This function will return the value of the config specified in the $key string.
+ */
+function get_store_config(string $key): mix
+
+/**
+ * This function will return Laravel\Nova\Fields\Field of the config specified in the $attribute string.
+ */
+function get_store_config_field(string $attribute): Laravel\Nova\Fields\Field
+
+/**
+ * This function will return a collection of all the fields setup in the config file.
+ */
+function get_store_config_fields(): collect
+
+/**
+ * This function will return a collection of all the panels setup in the config file.
+ */
+function get_store_config_panels(): collect
+```
+
 ## Roadmap
 
 The following features are planned or in development:

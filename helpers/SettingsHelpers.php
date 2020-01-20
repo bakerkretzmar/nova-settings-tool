@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Storage;
 
 if(!function_exists('get_store_config_panels'))
 {
+    $loaded_panels = null;
+
     /**
      * Get all the store config panels.
      *
@@ -11,9 +13,14 @@ if(!function_exists('get_store_config_panels'))
      */
     function get_store_config_panels()
     {
+        global $loaded_panels;
+        if($loaded_panels){
+            return $loaded_panels;
+        }
+
         $panels = collect(config('nova-settings-tool.panels'));
 
-        return $panels->map(function ($panel) {
+        $loaded_panels = $panels->map(function ($panel) {
             $panel['fields'] = array_map(function ($field) use ($panel) {
                 // Set the value into the field.
                 $field->value = $values[$field->attribute] ?? null;
@@ -43,10 +50,13 @@ if(!function_exists('get_store_config_panels'))
 
             return $panel;
         });
+        return $loaded_panels;
     }
 }
 if(!function_exists('get_store_config_fields'))
 {
+    $loaded_fields = null;
+
     /**
      * Get all the store config fields.
      *
@@ -54,11 +64,20 @@ if(!function_exists('get_store_config_fields'))
      */
     function get_store_config_fields()
     {
+        global $loaded_fields;
+
+        if ($loaded_fields) {
+            return $loaded_fields;
+        }
+
         $panels = get_store_config_panels();
 
-        return $panels->pluck('fields')->flatten();
+        $loaded_fields = $panels->pluck('fields')->flatten();
+
+        return $loaded_fields;
     }
 }
+
 if(!function_exists('get_store_config_field'))
 {
     /**
@@ -75,6 +94,7 @@ if(!function_exists('get_store_config_field'))
         return $fields->where('attribute', $attribute)->first();
     }
 }
+
 if(!function_exists('get_store_config'))
 {
     /**
@@ -104,3 +124,27 @@ if(!function_exists('get_store_config'))
         return $config_value;
     }
 }
+
+if(!function_exists('get_store_configs'))
+{
+    /**
+     * Get store configs value
+     *
+     * @param  array $keys The keys array of the stored configs
+     *
+     * @return object
+     */
+    function get_store_configs(array $keys = [])
+    {
+        $values = [];
+
+        foreach($keys as $key) {
+            $values[$key] = get_store_config($key);
+        }
+
+        return (object)$values;
+    }
+}
+
+
+
