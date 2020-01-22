@@ -1,8 +1,8 @@
 <?php
 
-namespace Bakerkretzmar\NovaSettingsTool;
+namespace Andreasgj\NovaSettingsTool;
 
-use Bakerkretzmar\NovaSettingsTool\Http\Middleware\Authorize;
+use Andreasgj\NovaSettingsTool\Http\Middleware\Authorize;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 

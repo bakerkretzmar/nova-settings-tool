@@ -1,6 +1,6 @@
 <?php
 
-namespace Bakerkretzmar\NovaSettingsTool\Tests;
+namespace Andreasgj\NovaSettingsTool\Tests;
 
 use Illuminate\Support\Facades\Storage;
 

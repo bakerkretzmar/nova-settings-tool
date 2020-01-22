@@ -1,7 +1,12 @@
 {
-    "name": "bakerkretzmar/nova-settings-tool",
+    "name": "andreasgj/nova-settings-tool",
     "description": "A Laravel Nova tool to manage application settings.",
     "authors": [
+        {
+            "name": "Andreas Gade Jensen",
+            "email": "andreasgj@gmail.com",
+            "role": "Developer"
+        },
         {
             "name": "Jacob Baker-Kretzmar",
             "email": "jacobtbk@gmail.com",
@@ -14,7 +19,7 @@
         "settings",
         "tool"
     ],
-    "homepage": "https://github.com/bakerkretzmar/nova-settings-tool",
+    "homepage": "https://github.com/AndreasGJ/nova-settings-tool",
     "license": "MIT",
     "repositories": [
         {
@@ -36,18 +41,18 @@
             "helpers/SettingsHelpers.php"
         ],
         "psr-4": {
-            "Bakerkretzmar\\NovaSettingsTool\\": "src/"
+            "Andreasgj\\NovaSettingsTool\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Bakerkretzmar\\NovaSettingsTool\\Tests\\": "tests/"
+            "Andreasgj\\NovaSettingsTool\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Bakerkretzmar\\NovaSettingsTool\\SettingsToolServiceProvider"
+                "Andreasgj\\NovaSettingsTool\\SettingsToolServiceProvider"
             ]
         }
     },

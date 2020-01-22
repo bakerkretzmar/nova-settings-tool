@@ -1,6 +1,6 @@
 <?php
 
-namespace Bakerkretzmar\NovaSettingsTool;
+namespace Andreasgj\NovaSettingsTool;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;

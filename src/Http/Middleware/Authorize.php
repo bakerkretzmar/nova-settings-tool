@@ -1,8 +1,8 @@
 <?php
 
-namespace Bakerkretzmar\NovaSettingsTool\Http\Middleware;
+namespace Andreasgj\NovaSettingsTool\Http\Middleware;
 
-use Bakerkretzmar\NovaSettingsTool\SettingsTool;
+use Andreasgj\NovaSettingsTool\SettingsTool;
 
 class Authorize
 {

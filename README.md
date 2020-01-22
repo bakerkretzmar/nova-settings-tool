@@ -1,9 +1,9 @@
 Laravel Nova tool to manage app settings
 ========================================
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/bakerkretzmar/nova-settings-tool.svg?style=flat)](https://packagist.org/packages/bakerkretzmar/nova-settings-tool)
-[![Total Downloads](https://img.shields.io/packagist/dt/bakerkretzmar/nova-settings-tool.svg?style=flat)](https://packagist.org/packages/bakerkretzmar/nova-settings-tool)
-[![Build](https://github.com/bakerkretzmar/nova-settings-tool/workflows/CI/badge.svg)](https://github.com/bakerkretzmar/nova-settings-tool/actions)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/Andreasgj/nova-settings-tool.svg?style=flat)](https://packagist.org/packages/Andreasgj/nova-settings-tool)
+[![Total Downloads](https://img.shields.io/packagist/dt/Andreasgj/nova-settings-tool.svg?style=flat)](https://packagist.org/packages/Andreasgj/nova-settings-tool)
+[![Build](https://github.com/Andreasgj/nova-settings-tool/workflows/CI/badge.svg)](https://github.com/Andreasgj/nova-settings-tool/actions)
 [![StyleCI](https://github.styleci.io/repos/165178010/shield?branch=master&style=flat)](https://github.styleci.io/repos/165178010)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://opensource.org/licenses/MIT)
 
@@ -16,7 +16,7 @@ Store and edit simple app-wide settings right in Nova. Settings are stored as JS
 Install the package via Composer in any Laravel app using [Nova](https://nova.laravel.com):
 
 ```shell
-composer require bakerkretzmar/nova-settings-tool
+composer require andreasgj/nova-settings-tool
 ```
 
 Publish the default configuration file to `config/nova-settings-tool.php`:
@@ -30,7 +30,7 @@ Register the tool with Nova in the `tools` method of your `NovaServiceProvider`:
 ```php
 // in app/Providers/NovaServiceProvider.php
 
-use Bakerkretzmar\NovaSettingsTool\SettingsTool;
+use Andreasgj\NovaSettingsTool\SettingsTool;
 
     // ...
 

@@ -1,5 +1,5 @@
 <?php
-namespace Bakerkretzmar\NovaSettingsTool\Http\Controllers;
+namespace Andreasgj\NovaSettingsTool\Http\Controllers;
 
 use App\Models\Client;
 use App\Nova\Client as ClientResource;

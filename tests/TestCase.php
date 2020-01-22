@@ -1,6 +1,5 @@
 <?php
-
-namespace Bakerkretzmar\NovaSettingsTool\Tests;
+namespace Andreasgj\NovaSettingsTool\Tests;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +25,7 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            \Bakerkretzmar\NovaSettingsTool\SettingsToolServiceProvider::class,
+            \Andreasgj\NovaSettingsTool\SettingsToolServiceProvider::class,
         ];
     }
 }
