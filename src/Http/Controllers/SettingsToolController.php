@@ -3,7 +3,6 @@
 namespace Bakerkretzmar\NovaSettingsTool\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Spatie\Valuestore\Valuestore;
 
 class SettingsToolController
 {
@@ -11,7 +10,7 @@ class SettingsToolController
 
     public function __construct()
     {
-        $this->store = Valuestore::make(
+        $this->store = config('nova-settings-tool.valuestore-class', '\Spatie\Valuestore\Valuestore')::make(
             config('nova-settings-tool.path', storage_path('app/settings.json'))
         );
     }
