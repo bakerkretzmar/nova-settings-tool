@@ -33,10 +33,10 @@ class SettingsToolController
 
         $settings = $settings->map(function ($setting) use ($values) {
             return array_merge([
-                    'type' => 'text',
-                    'label' => ucfirst($setting['key']),
-                    'value' => $values[$setting['key']] ?? null,
-                ], $setting);
+                'type' => 'text',
+                'label' => ucfirst($setting['key']),
+                'value' => $values[$setting['key']] ?? null,
+            ], $setting);
         })
             ->keyBy('key')
             ->all();
