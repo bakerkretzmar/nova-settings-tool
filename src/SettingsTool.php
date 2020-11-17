@@ -9,7 +9,7 @@ class SettingsTool extends Tool
 {
     public function boot()
     {
-        Nova::script('settings-tool', __DIR__.'/../dist/js/tool.js');
+        Nova::script('settings-tool', __DIR__ . '/../dist/js/tool.js');
     }
 
     public function renderNavigation()
