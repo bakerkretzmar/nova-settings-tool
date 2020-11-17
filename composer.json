@@ -27,8 +27,8 @@
         "spatie/valuestore": "^1.2"
     },
     "require-dev": {
-        "orchestra/testbench": "^4.0",
-        "phpunit/phpunit": "^8.3"
+        "orchestra/testbench": "^6.4",
+        "phpunit/phpunit": "^9.4"
     },
     "autoload": {
         "psr-4": {
