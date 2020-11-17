@@ -2,7 +2,7 @@
 
 namespace Bakerkretzmar\NovaSettingsTool\Events;
 
-class SettingsUpdated
+class SettingsChanged
 {
     public $settings;
     public $oldSettings;

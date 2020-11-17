@@ -2,7 +2,7 @@
 
 namespace Bakerkretzmar\NovaSettingsTool\Tests;
 
-use Bakerkretzmar\NovaSettingsTool\Events\SettingsUpdated;
+use Bakerkretzmar\NovaSettingsTool\Events\SettingsChanged;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 
@@ -68,7 +68,7 @@ class SettingsToolControllerTest extends TestCase
             'test_setting' => 'http://google.ca',
         ])->assertSuccessful();
 
-        Event::assertDispatched(function (SettingsUpdated $event) {
+        Event::assertDispatched(function (SettingsChanged $event) {
             $this->assertSame('http://google.ca', $event->settings['test_setting']);
             $this->assertSame('https://example.com', $event->oldSettings['test_setting']);
             return true;
