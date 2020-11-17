@@ -38,46 +38,46 @@ return [
     'settings' => [
 
         [
-            'key' => 'twitter_url',
+            'key'   => 'twitter_url',
             'label' => 'Twitter Profile',
             'panel' => 'Social',
         ],
 
         [
-            'key' => 'feature_42',
+            'key'   => 'feature_42',
             'label' => 'Feature 42',
-            'type' => 'toggle',
-            'help' => 'For the upcoming release. <a href="/docs#feature_42">Read more here.</a>',
+            'type'  => 'toggle',
+            'help'  => 'For the upcoming release. <a href="/docs#feature_42">Read more here.</a>',
         ],
 
         [
-            'key' => 'welcome',
+            'key'   => 'welcome',
             'label' => 'Welcome Message',
-            'type' => 'textarea',
-            'help' => 'Greeting for new users on their first login.',
+            'type'  => 'textarea',
+            'help'  => 'Greeting for new users on their first login.',
         ],
 
         [
-            'key' => 'snippet',
-            'label' => 'Tracking Snippet',
-            'type' => 'code',
+            'key'      => 'snippet',
+            'label'    => 'Tracking Snippet',
+            'type'     => 'code',
             'language' => 'htmlmixed',
-            'help' => 'Analytics snippet to add to all marketing pages.',
+            'help'     => 'Analytics snippet to add to all marketing pages.',
         ],
 
         [
-            'key' => 'theme',
-            'label' => 'Default App Theme',
-            'type' => 'select',
+            'key'     => 'theme',
+            'label'   => 'Default App Theme',
+            'type'    => 'select',
             'options' => [
-                'dark' => 'Dark theme',
+                'dark'  => 'Dark theme',
                 'light' => 'Light theme',
             ],
         ],
 
         [
-            'key' => 'timeout',
-            'type' => 'Number',
+            'key'   => 'timeout',
+            'type'  => 'Number',
             'label' => 'Timeout (min.)',
         ],
 

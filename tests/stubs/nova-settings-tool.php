@@ -7,10 +7,10 @@ return [
     'settings' => [
 
         [
-            'type' => 'text',
-            'key' => 'facebook_url',
-            'label' => 'Facebook',
-            'help' => 'App Twitter page URL. <a href="#">Read more.</a>',
+            'type'    => 'text',
+            'key'     => 'facebook_url',
+            'label'   => 'Facebook',
+            'help'    => 'App Twitter page URL. <a href="#">Read more.</a>',
             'default' => 'jacobbakr',
         ],
 
@@ -33,24 +33,24 @@ return [
             'settings' => [
 
                 [
-                    'key' => 'facebook_url',
-                    'name' => 'Facebook',
-                    'type' => 'text',
+                    'key'         => 'facebook_url',
+                    'name'        => 'Facebook',
+                    'type'        => 'text',
                     'description' => 'App Facebook page URL.',
-                    'link' => [
+                    'link'        => [
                         'text' => 'More.',
-                        'url' => '/documentation#facebook_url',
+                        'url'  => '/documentation#facebook_url',
                     ],
                 ],
 
                 [
-                    'key' => 'test_string',
-                    'name' => 'Test String',
-                    'type' => 'text',
+                    'key'         => 'test_string',
+                    'name'        => 'Test String',
+                    'type'        => 'text',
                     'description' => 'Test string.',
-                    'link' => [
+                    'link'        => [
                         'text' => 'More.',
-                        'url' => '/documentation#twitter_url',
+                        'url'  => '/documentation#twitter_url',
                     ],
                 ],
 
@@ -65,48 +65,48 @@ return [
             'settings' => [
 
                 [
-                    'key' => 'new_feature',
-                    'name' => 'New Feature',
-                    'type' => 'toggle',
+                    'key'         => 'new_feature',
+                    'name'        => 'New Feature',
+                    'type'        => 'toggle',
                     'description' => 'Top secret new app feature.',
-                    'link' => [
+                    'link'        => [
                         'text' => 'Documentation',
-                        'url' => '/documentation#new_feature',
+                        'url'  => '/documentation#new_feature',
                     ],
                 ],
 
                 [
-                    'key' => 'enabled_feature',
-                    'name' => 'Enabled Feature',
-                    'type' => 'toggle',
-                    'default' => true,
+                    'key'         => 'enabled_feature',
+                    'name'        => 'Enabled Feature',
+                    'type'        => 'toggle',
+                    'default'     => true,
                     'description' => 'Feature enabled by default.',
-                    'link' => [
+                    'link'        => [
                         'text' => 'Documentation',
-                        'url' => '/documentation#new_feature',
+                        'url'  => '/documentation#new_feature',
                     ],
                 ],
 
                 [
-                    'key' => 'welcome_message',
-                    'name' => 'Welcome Message',
-                    'type' => 'textarea',
+                    'key'         => 'welcome_message',
+                    'name'        => 'Welcome Message',
+                    'type'        => 'textarea',
                     'description' => 'Message for new users on their first login.',
-                    'link' => [
+                    'link'        => [
                         'text' => 'Documentation',
-                        'url' => '/documentation#new_feature',
+                        'url'  => '/documentation#new_feature',
                     ],
                 ],
 
                 [
-                    'key' => 'snippet',
-                    'name' => 'Code Snippet',
-                    'type' => 'code',
-                    'language' => 'javascript',
+                    'key'         => 'snippet',
+                    'name'        => 'Code Snippet',
+                    'type'        => 'code',
+                    'language'    => 'javascript',
                     'description' => 'Code to inject into the homepage.',
-                    'link' => [
+                    'link'        => [
                         'text' => 'Documentation',
-                        'url' => '/documentation#new_feature',
+                        'url'  => '/documentation#new_feature',
                     ],
                 ],
 

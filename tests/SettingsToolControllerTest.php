@@ -13,7 +13,7 @@ class SettingsToolControllerTest extends TestCase
 
         $response->assertSuccessful();
         $response->assertJsonFragment([
-            'key' => 'test_setting',
+            'key'   => 'test_setting',
             'value' => 'https://example.com',
         ]);
     }
@@ -23,16 +23,16 @@ class SettingsToolControllerTest extends TestCase
     {
         Storage::disk('public')->put(
             'custom/configurations.json',
-            file_get_contents(__DIR__ . '/stubs/settings.json')
+            file_get_contents(__DIR__.'/stubs/settings.json')
         );
 
-        config(['nova-settings-tool.path' => base_path() . '/storage/app/public/custom/configurations.json']);
+        config(['nova-settings-tool.path' => base_path().'/storage/app/public/custom/configurations.json']);
 
         $response = $this->get('nova-vendor/settings-tool');
 
         $response->assertSuccessful();
         $response->assertJsonFragment([
-            'key' => 'test_setting',
+            'key'   => 'test_setting',
             'value' => 'https://example.com',
         ]);
     }
@@ -43,8 +43,8 @@ class SettingsToolControllerTest extends TestCase
         $response = $this->get('nova-vendor/settings-tool');
 
         $response->assertJsonFragment([
-            'key' => 'setting_with_no_metadata',
-            'type' => 'text',
+            'key'   => 'setting_with_no_metadata',
+            'type'  => 'text',
             'label' => 'Setting_with_no_metadata',
             'value' => null,
         ]);
