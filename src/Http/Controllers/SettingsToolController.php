@@ -2,6 +2,7 @@
 
 namespace Bakerkretzmar\NovaSettingsTool\Http\Controllers;
 
+use Bakerkretzmar\NovaSettingsTool\Events\SettingsUpdated;
 use Illuminate\Http\Request;
 use Spatie\Valuestore\Valuestore;
 
@@ -46,9 +47,13 @@ class SettingsToolController
 
     public function write(Request $request)
     {
+        $oldSettings = $this->store->all();
+
         foreach ($request->all() as $key => $value) {
             $this->store->put($key, $value);
         }
+
+        event(new SettingsUpdated($this->store->all(), $oldSettings));
 
         return response()->json();
     }

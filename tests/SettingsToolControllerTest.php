@@ -2,6 +2,8 @@
 
 namespace Bakerkretzmar\NovaSettingsTool\Tests;
 
+use Bakerkretzmar\NovaSettingsTool\Events\SettingsUpdated;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 
 class SettingsToolControllerTest extends TestCase
@@ -9,13 +11,12 @@ class SettingsToolControllerTest extends TestCase
     /** @test */
     public function can_read_settings()
     {
-        $response = $this->get('nova-vendor/settings-tool');
-
-        $response->assertSuccessful();
-        $response->assertJsonFragment([
-            'key' => 'test_setting',
-            'value' => 'https://example.com',
-        ]);
+        $this->get('nova-vendor/settings-tool')
+            ->assertSuccessful()
+            ->assertJsonFragment([
+                'key' => 'test_setting',
+                'value' => 'https://example.com',
+            ]);
     }
 
     /** @test */
@@ -28,37 +29,49 @@ class SettingsToolControllerTest extends TestCase
 
         config(['nova-settings-tool.path' => base_path() . '/storage/app/public/custom/configurations.json']);
 
-        $response = $this->get('nova-vendor/settings-tool');
-
-        $response->assertSuccessful();
-        $response->assertJsonFragment([
-            'key' => 'test_setting',
-            'value' => 'https://example.com',
-        ]);
+        $this->get('nova-vendor/settings-tool')
+            ->assertSuccessful()
+            ->assertJsonFragment([
+                'key' => 'test_setting',
+                'value' => 'https://example.com',
+            ]);
     }
 
     /** @test */
     public function can_fill_default_setting_metadata_automatically()
     {
-        $response = $this->get('nova-vendor/settings-tool');
-
-        $response->assertJsonFragment([
-            'key' => 'setting_with_no_metadata',
-            'type' => 'text',
-            'label' => 'Setting_with_no_metadata',
-            'value' => null,
-        ]);
+        $this->get('nova-vendor/settings-tool')
+            ->assertJsonFragment([
+                'key' => 'setting_with_no_metadata',
+                'type' => 'text',
+                'label' => 'Setting_with_no_metadata',
+                'value' => null,
+            ]);
     }
 
     /** @test */
     public function can_write_settings()
     {
-        $response = $this->postJson('nova-vendor/settings-tool', [
+        $this->postJson('nova-vendor/settings-tool', [
             'test_setting' => 'http://google.ca',
-        ]);
-
-        $response->assertSuccessful();
+        ])->assertSuccessful();
         $this->assertArrayHasKey('test_setting', json_decode(Storage::get('settings.json'), true));
         $this->assertSame('http://google.ca', json_decode(Storage::get('settings.json'), true)['test_setting']);
+    }
+
+    /** @test */
+    public function can_emit_event_when_settings_updated()
+    {
+        Event::fake();
+
+        $this->postJson('nova-vendor/settings-tool', [
+            'test_setting' => 'http://google.ca',
+        ])->assertSuccessful();
+
+        Event::assertDispatched(function (SettingsUpdated $event) {
+            $this->assertSame('http://google.ca', $event->settings['test_setting']);
+            $this->assertSame('https://example.com', $event->oldSettings['test_setting']);
+            return true;
+        });
     }
 }
