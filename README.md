@@ -4,7 +4,6 @@ Laravel Nova tool to manage app settings
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/bakerkretzmar/nova-settings-tool.svg?style=flat)](https://packagist.org/packages/bakerkretzmar/nova-settings-tool)
 [![Total Downloads](https://img.shields.io/packagist/dt/bakerkretzmar/nova-settings-tool.svg?style=flat)](https://packagist.org/packages/bakerkretzmar/nova-settings-tool)
 [![Build](https://github.com/bakerkretzmar/nova-settings-tool/workflows/CI/badge.svg)](https://github.com/bakerkretzmar/nova-settings-tool/actions)
-[![StyleCI](https://github.styleci.io/repos/165178010/shield?branch=master&style=flat)](https://github.styleci.io/repos/165178010)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://opensource.org/licenses/MIT)
 
 Store and edit simple app-wide settings right in Nova. Settings are stored as JSON using [`spatie/valuestore`](https://github.com/spatie/valuestore), making them really easy to [pull in and use everywhere else in your app](https://laravel-news.com/global-application-settings).
@@ -15,13 +14,13 @@ Store and edit simple app-wide settings right in Nova. Settings are stored as JS
 
 Install the package via Composer in any Laravel app using [Nova](https://nova.laravel.com):
 
-```shell
+```bash
 composer require bakerkretzmar/nova-settings-tool
 ```
 
 Publish the default configuration file to `config/nova-settings-tool.php`:
 
-```shell
+```bash
 php artisan vendor:publish --tag="nova-settings-tool"
 ```
 
@@ -62,6 +61,8 @@ There are currently six available setting types:
 - `select`: Single-select dropdown
 
 All strings in this package, and any you pass to it, can easily be translated using [Laravel’s built-in localization features](https://laravel.com/docs/localization#using-translation-strings-as-keys).
+
+This tool also fires an event any time any settings are changed, with all the old and new settings attached.
 
 ## Roadmap
 
