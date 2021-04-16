@@ -57,9 +57,11 @@ export default {
         panels: {},
     }),
 
-    metaInfo: () => ({
-        title: this.title,
-    }),
+    metaInfo() {
+        return {
+            title: this.title,
+        }
+    },
 
     mounted() {
         Nova.request().get('/nova-vendor/settings-tool')
