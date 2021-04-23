@@ -56,6 +56,12 @@ export default {
         panels: {},
     }),
 
+    metaInfo() {
+        return {
+            title: 'Settings',
+        }
+    },
+
     mounted() {
         Nova.request().get('/nova-vendor/settings-tool')
             .then(response => {
