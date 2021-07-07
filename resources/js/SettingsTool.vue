@@ -49,6 +49,12 @@ export default {
         TextareaSetting,
         ToggleSetting,
     },
+    
+    metaInfo() {
+        return {
+            title: 'Settings',
+        }
+    },
 
     data: () => ({
         saving: false,
