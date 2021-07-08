@@ -22,8 +22,8 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0",
-        "laravel/nova": "*",
+        "php": "^7.1|^8.0",
+        "laravel/nova": "^1.0|^2.0|^3.0",
         "spatie/valuestore": "^1.2"
     },
     "require-dev": {
