@@ -2,6 +2,14 @@
 
 All notable changes to `nova-settings-tool` will be documented in this file.
 
+## 1.1.2 – 2021-07-07
+
+- Set (and allow configuring) the Settings tool page title ([#42](https://github.com/bakerkretzmar/nova-settings-tool/pull/42))
+
+## 1.1.0 – 2020-11-17
+
+- Add a `SettingsChanged` event that fires every time any settings are updated ([#39](https://github.com/bakerkretzmar/nova-settings-tool/pull/39))
+
 ## 1.0.1 – 2019-11-15
 
 - Fix an issue where the "Other" panel heading displays even when empty
