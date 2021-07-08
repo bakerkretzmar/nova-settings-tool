@@ -44,7 +44,11 @@ class SettingsToolController
             ->keyBy('key')
             ->all();
 
-        return response()->json(compact('title','settings', 'panels'));
+        return response()->json([
+            'title' => config('nova-settings-tool.title'),
+            'settings' => $settings,
+            'panels' => $panels,
+        ]);
     }
 
     public function write(Request $request)

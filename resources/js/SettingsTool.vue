@@ -65,10 +65,10 @@ export default {
 
     mounted() {
         Nova.request().get('/nova-vendor/settings-tool')
-            .then(response => {
-                this.title = response.data.title
-                this.settings = response.data.settings
-                this.panels = response.data.panels
+            .then(({ data }) => {
+                this.title = data.title
+                this.settings = data.settings
+                this.panels = data.panels
             })
     },
 

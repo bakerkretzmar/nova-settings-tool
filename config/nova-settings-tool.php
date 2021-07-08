@@ -26,10 +26,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Document Title
+    | Title
     |--------------------------------------------------------------------------
     |
-    | The text that Nova displays for this tool in the document title.
+    | The browser/meta page title for the tool.
     |
     */
 
