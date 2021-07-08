@@ -1,6 +1,6 @@
 <?php
 
-namespace Bakerkretzmar\NovaSettingsTool\Tests;
+namespace Tests;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;

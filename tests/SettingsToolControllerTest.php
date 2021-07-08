@@ -1,6 +1,6 @@
 <?php
 
-namespace Bakerkretzmar\NovaSettingsTool\Tests;
+namespace Tests;
 
 use Bakerkretzmar\NovaSettingsTool\Events\SettingsChanged;
 use Illuminate\Support\Facades\Event;
