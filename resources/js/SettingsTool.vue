@@ -66,7 +66,7 @@ export default {
     mounted() {
         Nova.request().get('/nova-vendor/settings-tool')
             .then(({ data }) => {
-                this.title = data.title
+                this.title = this.__(data.title)
                 this.settings = data.settings
                 this.panels = data.panels
             })
