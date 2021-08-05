@@ -2,6 +2,10 @@
 
 All notable changes to `nova-settings-tool` will be documented in this file.
 
+## 1.1.3 – 2021-08-05
+
+- Default Settings tool page title to `Settings` and make it translatable
+
 ## 1.1.2 – 2021-07-07
 
 - Set (and allow configuring) the Settings tool page title ([#42](https://github.com/bakerkretzmar/nova-settings-tool/pull/42))
