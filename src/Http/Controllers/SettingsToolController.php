@@ -21,8 +21,6 @@ class SettingsToolController
     {
         $values = $this->store->all();
 
-        $title = config('nova-settings-tool.title');
-
         $settings = collect(config('nova-settings-tool.settings'));
 
         $panels = $settings->where('panel', '!=', null)->pluck('panel')->unique()
@@ -45,7 +43,7 @@ class SettingsToolController
             ->all();
 
         return response()->json([
-            'title' => config('nova-settings-tool.title'),
+            'title' => config('nova-settings-tool.title', 'Settings'),
             'settings' => $settings,
             'panels' => $panels,
         ]);
