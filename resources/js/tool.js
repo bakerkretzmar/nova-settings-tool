@@ -1,9 +1,5 @@
-Nova.booting((Vue, router, store) => {
-    router.addRoutes([
-        {
-            name: 'settings-tool',
-            path: '/settings',
-            component: require('./SettingsTool'),
-        },
-    ])
-})
+import Tool from './Tool.vue';
+
+Nova.booting((app, store) => {
+    Nova.inertia('NovaSettingsTool', Tool);
+});

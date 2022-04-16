@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class SettingsToolControllerTest extends TestCase
 {
     /** @test */
-    public function can_read_settings()
+    public function read_settings()
     {
         $this->get('nova-vendor/settings-tool')
             ->assertSuccessful()
@@ -20,7 +20,7 @@ class SettingsToolControllerTest extends TestCase
     }
 
     /** @test */
-    public function can_read_settings_from_custom_path()
+    public function read_settings_from_custom_path()
     {
         Storage::disk('public')->put(
             'custom/configurations.json',
@@ -38,7 +38,7 @@ class SettingsToolControllerTest extends TestCase
     }
 
     /** @test */
-    public function can_fill_default_setting_metadata_automatically()
+    public function fill_default_setting_metadata_automatically()
     {
         $this->get('nova-vendor/settings-tool')
             ->assertJsonFragment([
@@ -50,7 +50,7 @@ class SettingsToolControllerTest extends TestCase
     }
 
     /** @test */
-    public function can_write_settings()
+    public function write_settings()
     {
         $this->postJson('nova-vendor/settings-tool', [
             'test_setting' => 'http://google.ca',
@@ -60,7 +60,7 @@ class SettingsToolControllerTest extends TestCase
     }
 
     /** @test */
-    public function can_emit_event_when_settings_updated()
+    public function emit_event_when_settings_updated()
     {
         Event::fake();
 
