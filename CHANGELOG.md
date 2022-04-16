@@ -2,6 +2,10 @@
 
 All notable changes to `nova-settings-tool` will be documented in this file.
 
+## 2.0.0 – 2022-04-16
+
+- Add support for Nova 4
+
 ## 1.1.3 – 2021-08-05
 
 - Default Settings tool page title to `Settings` and make it translatable
