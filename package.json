@@ -3,56 +3,20 @@
     "scripts": {
         "dev": "mix",
         "watch": "mix watch",
-        "prod": "mix --production",
-        "test": "jest --verbose"
+        "prod": "mix --production"
     },
     "devDependencies": {
         "@vue/compiler-sfc": "^3.2.22",
-        "@vue/test-utils": "^1.0.0-beta.29",
         "codemirror": "^5.65.2",
-        "jest": "^24.8.0",
         "laravel-mix": "^6.0.41",
         "lodash": "^4.17.21",
-        "postcss": "^8.3.11",
         "prettier": "^2.6.2",
-        "vue-jest": "^3.0.4",
-        "vue-loader": "^16.8.3"
+        "vue": "^3.2.33",
+        "vue-loader": "^17.0.0"
     },
     "prettier": {
         "printWidth": 140,
         "tabWidth": 4,
         "singleQuote": true
-    },
-    "jest": {
-        "moduleFileExtensions": [
-            "js",
-            "vue"
-        ],
-        "moduleNameMapper": {
-            "^@/(.*)$": "<rootDir>/resources/js/$1"
-        },
-        "transform": {
-            "^.+\\.js$": "babel-jest",
-            "^.+\\.vue$": "vue-jest"
-        },
-        "testMatch": [
-            "<rootDir>/tests/js/**/*.spec.js"
-        ]
-    },
-    "babel": {
-        "env": {
-            "test": {
-                "presets": [
-                    [
-                        "env",
-                        {
-                            "targets": {
-                                "node": "current"
-                            }
-                        }
-                    ]
-                ]
-            }
-        }
     }
 }
