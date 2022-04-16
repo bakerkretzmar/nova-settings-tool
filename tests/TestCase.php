@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -12,7 +11,7 @@ abstract class TestCase extends Orchestra
     {
         parent::setUp();
 
-        Route::middlewareGroup('nova', []);
+        $this->withoutMiddleware();
 
         Storage::put(
             'settings.json',
