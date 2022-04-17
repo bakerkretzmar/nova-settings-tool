@@ -18,7 +18,7 @@ Install the package via Composer in any Laravel app using [Nova](https://nova.la
 composer require bakerkretzmar/nova-settings-tool
 ```
 
-> Nova Settings Tool currently requires Nova 4—for older versions of Nova, use v1 of this package.
+> Nova Settings Tool v2 requires Nova 4—for older versions of Nova, use v1 of this package.
 
 Publish the default configuration file to `config/nova-settings-tool.php`:
 
