@@ -1,8 +1,10 @@
 name: CI
 on:
   pull_request:
+    paths-ignore: ['dist/**', '*.md']
   push:
     branches: [1.x, 2.x]
+    paths-ignore: ['dist/**', '*.md']
 jobs:
   test:
     name: Tests
