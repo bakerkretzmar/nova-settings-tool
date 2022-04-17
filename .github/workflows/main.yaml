@@ -2,7 +2,7 @@ name: CI
 on:
   pull_request:
   push:
-    brances: [1.x, 2.x]
+    branches: [1.x, 2.x]
 jobs:
   test:
     name: Tests
