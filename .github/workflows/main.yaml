@@ -1,25 +1,20 @@
 name: CI
-
 on:
   pull_request:
   push:
-    brances: [main]
-
+    branches: [1.x, 2.x]
 jobs:
   test:
     name: Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@v2
         with:
-          fetch-depth: 1
-      - env:
+          php-version: 8.0
+      - run: composer config http-basic.nova.laravel.com $NOVA_USERNAME $NOVA_PASSWORD
+        env:
           NOVA_USERNAME: ${{ secrets.NOVA_USERNAME }}
           NOVA_PASSWORD: ${{ secrets.NOVA_PASSWORD }}
-        run: |
-          composer config http-basic.nova.laravel.com $NOVA_USERNAME $NOVA_PASSWORD
-          composer install -n --prefer-dist --no-ansi --no-progress --no-suggest --no-scripts
+      - uses: ramsey/composer-install@v2
       - run: vendor/bin/phpunit --testdox --colors=always
-      - run: |
-          npm install
-          npm run test

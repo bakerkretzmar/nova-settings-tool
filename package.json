@@ -1,52 +1,22 @@
 {
     "private": true,
     "scripts": {
-        "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "prod": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "test": "jest --verbose"
+        "dev": "mix",
+        "watch": "mix watch",
+        "prod": "mix --production"
     },
     "devDependencies": {
-        "@vue/test-utils": "^1.0.0-beta.29",
-        "codemirror": "^5.49.0",
-        "cross-env": "^6.0.0",
-        "jest": "^24.8.0",
-        "laravel-mix": "^1.0",
-        "vue-jest": "^3.0.4"
+        "@vue/compiler-sfc": "^3.2.22",
+        "codemirror": "^5.65.2",
+        "laravel-mix": "^6.0.41",
+        "lodash": "^4.17.21",
+        "prettier": "^2.6.2",
+        "vue": "^3.2.33",
+        "vue-loader": "^17.0.0"
     },
-    "dependencies": {
-        "vue": "^2.5.0"
-    },
-    "jest": {
-        "moduleFileExtensions": [
-            "js",
-            "vue"
-        ],
-        "moduleNameMapper": {
-            "^@/(.*)$": "<rootDir>/resources/js/$1"
-        },
-        "transform": {
-            "^.+\\.js$": "babel-jest",
-            "^.+\\.vue$": "vue-jest"
-        },
-        "testMatch": [
-            "<rootDir>/tests/js/**/*.spec.js"
-        ]
-    },
-    "babel": {
-        "env": {
-            "test": {
-                "presets": [
-                    [
-                        "env",
-                        {
-                            "targets": {
-                                "node": "current"
-                            }
-                        }
-                    ]
-                ]
-            }
-        }
+    "prettier": {
+        "printWidth": 140,
+        "tabWidth": 4,
+        "singleQuote": true
     }
 }

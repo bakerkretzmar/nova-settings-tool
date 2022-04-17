@@ -1,6 +1,15 @@
 const mix = require('laravel-mix');
+const { join } = require('path');
 
-mix.disableNotifications();
+mix.setPublicPath('dist').disableNotifications();
 
-mix.setPublicPath('dist')
-    .js('resources/js/tool.js', 'js');
+mix.vue({ version: 3 })
+    .js('resources/js/tool.js', 'js')
+    .webpackConfig({
+        externals: {
+            vue: 'Vue',
+        },
+        output: {
+            uniqueName: 'bakerkretzmar/nova-settings-tool',
+        },
+    });
