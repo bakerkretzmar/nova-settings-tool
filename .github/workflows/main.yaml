@@ -16,5 +16,5 @@ jobs:
         env:
           NOVA_USERNAME: ${{ secrets.NOVA_USERNAME }}
           NOVA_PASSWORD: ${{ secrets.NOVA_PASSWORD }}
-      - run: ramsey/composer-install@v2
+      - uses: ramsey/composer-install@v2
       - run: vendor/bin/phpunit --testdox --colors=always
