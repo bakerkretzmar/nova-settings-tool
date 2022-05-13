@@ -1,22 +1,24 @@
 <template>
-    <Head :title="title" />
-    <template v-for="(keys, panel) in panels">
-        <Heading class="mb-6">{{ __(panelName(panel)) }}</Heading>
-        <Card class="overflow-hidden mb-8">
-            <Component
-                v-for="(setting, index) in keys"
-                :index="index"
-                :key="settings[setting].key"
-                :is="`${settings[setting].type}Setting`"
-                :setting="settings[setting]"
-                @update="updateSetting"
-            />
-        </Card>
-    </template>
-    <div class="flex">
-        <LoadingButton class="ml-auto" @click="saveSettings" :processing="saving">
-            {{ __('Save') }}
-        </LoadingButton>
+    <div>
+        <Head :title="title" />
+        <template v-for="(keys, panel) in panels">
+            <Heading class="mb-6">{{ __(panelName(panel)) }}</Heading>
+            <Card class="overflow-hidden mb-8">
+                <Component
+                    v-for="(setting, index) in keys"
+                    :index="index"
+                    :key="settings[setting].key"
+                    :is="`${settings[setting].type}Setting`"
+                    :setting="settings[setting]"
+                    @update="updateSetting"
+                />
+            </Card>
+        </template>
+        <div class="flex">
+            <LoadingButton class="ml-auto" @click="saveSettings" :processing="saving">
+                {{ __('Save') }}
+            </LoadingButton>
+        </div>
     </div>
 </template>
 
