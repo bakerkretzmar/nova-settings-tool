@@ -2,6 +2,10 @@
 
 All notable changes to `nova-settings-tool` will be documented in this file.
 
+## 2.0.1 – 2022-05-22
+
+- Fix navigation issue after viewing tool by [@ramcda](https://github.com/ramcda) in [#49](https://github.com/bakerkretzmar/nova-settings-tool/pull/49)
+
 ## 2.0.0 – 2022-04-16
 
 - Add support for Nova 4
