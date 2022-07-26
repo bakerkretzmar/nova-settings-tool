@@ -48,7 +48,7 @@ export default {
                 value: cm.getValue(),
             });
         });
-        this.codemirror?.getDoc()?.setValue(this.setting.value);
+        this.codemirror?.getDoc()?.setValue(this.setting.value ?? '');
         this.codemirror?.setSize('100%');
     },
 };
