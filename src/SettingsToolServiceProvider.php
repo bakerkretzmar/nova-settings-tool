@@ -5,6 +5,7 @@ namespace Bakerkretzmar\NovaSettingsTool;
 use Bakerkretzmar\NovaSettingsTool\Http\Middleware\Authorize;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Nova\Http\Middleware\Authenticate;
 use Laravel\Nova\Nova;
 
 class SettingsToolServiceProvider extends ServiceProvider
@@ -26,10 +27,10 @@ class SettingsToolServiceProvider extends ServiceProvider
             return;
         }
 
-        Nova::router(['nova', Authorize::class], 'settings')
+        Nova::router(['nova', Authenticate::class, Authorize::class], 'settings')
             ->group(__DIR__ . '/../routes/inertia.php');
 
-        Route::middleware(['nova', Authorize::class])
+        Route::middleware(['nova', Authenticate::class, Authorize::class])
             ->prefix('nova-vendor/nova-settings-tool')
             ->group(__DIR__ . '/../routes/api.php');
     }
