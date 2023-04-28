@@ -2,6 +2,14 @@
 
 All notable changes to `nova-settings-tool` will be documented in this file.
 
+## 2.0.3 – 2023-04-28
+
+- Add `Authenticate` middleware to fix publicly accessible API routes by [@ramonrietdijk](https://github.com/ramonrietdijk) in [#54](https://github.com/bakerkretzmar/nova-settings-tool/pull/54)
+
+## 2.0.2 – 2022-07-25
+
+- Handle null values in code fields by [@bakerkretzmar](https://github.com/bakerkretzmar) in [9d348e3](https://github.com/bakerkretzmar/nova-settings-tool/commit/9d348e350b18e6fcb83cb5d8d747b843746e4a03)
+
 ## 2.0.1 – 2022-05-22
 
 - Fix navigation issue after viewing tool by [@ramcda](https://github.com/ramcda) in [#49](https://github.com/bakerkretzmar/nova-settings-tool/pull/49)
