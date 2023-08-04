@@ -2,6 +2,10 @@
 
 All notable changes to `nova-settings-tool` will be documented in this file.
 
+## 2.0.4 – 2023-08-04
+
+- Fix styling issues introduced in Nova v4.26.5.
+
 ## 2.0.3 – 2023-04-28
 
 - Add `Authenticate` middleware to fix publicly accessible API routes by [@ramonrietdijk](https://github.com/ramonrietdijk) in [#54](https://github.com/bakerkretzmar/nova-settings-tool/pull/54)

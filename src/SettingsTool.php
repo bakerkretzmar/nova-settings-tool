@@ -12,6 +12,7 @@ class SettingsTool extends Tool
     public function boot()
     {
         Nova::script('nova-settings-tool', __DIR__ . '/../dist/js/tool.js');
+        Nova::style('nova-settings-tool', __DIR__ . '/../dist/css/tool.css');
     }
 
     public function menu(Request $request)
