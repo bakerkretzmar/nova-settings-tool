@@ -1,22 +1,23 @@
 name: CI
 on:
-  pull_request:
-    paths-ignore: ['dist/**', '*.md']
-  push:
-    branches: [1.x, 2.x]
-    paths-ignore: ['dist/**', '*.md']
+    pull_request:
+        paths-ignore: ['dist/**', '*.md']
+    push:
+        branches: [1.x, 2.x]
+        paths-ignore: ['dist/**', '*.md']
 jobs:
-  test:
-    name: Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.0
-      - run: composer config http-basic.nova.laravel.com $NOVA_USERNAME $NOVA_PASSWORD
-        env:
-          NOVA_USERNAME: ${{ secrets.NOVA_USERNAME }}
-          NOVA_PASSWORD: ${{ secrets.NOVA_PASSWORD }}
-      - uses: ramsey/composer-install@v2
-      - run: vendor/bin/phpunit --testdox --colors=always
+    test:
+        name: Tests
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: 8.0
+            - run: composer config http-basic.nova.laravel.com $NOVA_USERNAME $NOVA_PASSWORD
+              env:
+                  NOVA_USERNAME: ${{ secrets.NOVA_USERNAME }}
+                  NOVA_PASSWORD: ${{ secrets.NOVA_PASSWORD }}
+            - run: composer require laravel/nova:4.22.2 --no-update
+            - uses: ramsey/composer-install@v2
+            - run: vendor/bin/phpunit --testdox --colors=always
