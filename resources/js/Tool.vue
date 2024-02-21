@@ -30,6 +30,7 @@ import SelectSetting from './SelectSetting.vue';
 import TextSetting from './TextSetting.vue';
 import TextareaSetting from './TextareaSetting.vue';
 import ToggleSetting from './ToggleSetting.vue';
+import LoadingButton from './LoadingButton.vue';
 
 export default {
     components: {
@@ -39,6 +40,7 @@ export default {
         TextSetting,
         TextareaSetting,
         ToggleSetting,
+        LoadingButton,
     },
     data: () => ({
         saving: false,
